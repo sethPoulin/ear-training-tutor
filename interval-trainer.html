@@ -7,12 +7,61 @@
   <title>Document</title>
 </head>
 <body>
-  
-</body>
+<section>
+  <button>Get interval length</button>
+  <form action="">
+      <fieldset>
+          <legend>Octaves</legend>
+        
+          <label for="octave1">Octave 1</label>
+          <input type="checkbox" id="octave1" name="octave" value="octave1">
+        
+          <label for="octave2">Octave 2</label>
+          <input type="checkbox" id="octave2" name="octave" value="octave2">
+        
+          <label for="octave3">Octave 3</label>
+          <input type="checkbox" id="octave3" name="octave" value="octave3">
+        
+          <label for="octave4">Octave 4</label>
+          <input type="checkbox" id="octave4" name="octave" value="octave4" checked>
+        
+          <label for="octave5">Octave 5</label>
+          <input type="checkbox" id="octave5" name="octave" value="octave5">
+
+          <label for="octave6">Octave 6</label>
+          <input type="checkbox" id="octave6" name="octave" value="octave6">
+          
+          <label for="octave7">Octave 7</label>
+          <input type="checkbox" id="octave7" name="octave" value="octave7">
+        </fieldset>
+        <label for="maxInterval">Select the max interval length (in semitones):</label>
+        <select name="maxInterval" id="maxInterval">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8" selected="true">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+        </select>
+  </form>
+</section>
+
 <script>
 
-
-// psuedocode for ear training app
 
   //create octave note arrays
 
@@ -24,31 +73,90 @@
 
   const octave1 = ['a1','a#1','b1','c1','c#1','d#1','e1','f1','f#1','g1','g#1'];
   const octave2 = ['a2','a#2','b2','c2','c#2','d#2','e2','f2','f#2','g2','g#2'];
+  const octave3 = ['a3','a#3','b3','c3','c#3','d#3','e3','f3','f#3','g3','g#3'];
+  const octave4 = ['a4','a#4','b4','c4','c#4','d#4','e4','f4','f#4','g4','g#4'];
+  const octave5 = ['a5','a#5','b5','c5','c#5','d#5','e5','f5','f#5','g5','g#5'];
+  const octave6 = ['a6','a#6','b6','c6','c#6','d#6','e6','f6','f#6','g6','g#6'];
+  const octave7 = ['a7','a#7','b7','c7','c#7','d#7','e7','f7','f#7','g7','g#7'];
   // etc.
 
   //prompt user to choose number of octaves and music interval length (in notes).  Store the choice in a variable userIntervalLength, e.g. 3.
 
-  const compareNote = () => {
+  // const getUserOctaves = (e) => {
+  //   const octaveCheckbox = document.querySelector(`input[type="checkbox",key="${e.target}"]`);
+  //   console.log('octaveCheckbox:',octaveCheckbox);
+  //   const userSelection = e.target.value;
+  //   //empty out userOctaves
+  //   userOctaves.length = 0;
+  //   userOctaves.push(userSelection);
+  // }
 
-    const userIntervalLength = 3;
-    const userOctaves = [octave1, octave2];
-    const testNotes = userOctaves.flat();
+  
 
-    
+  //we will eventually use this to highlight the range of possible notes on the keyboard
+  let currentInterval = 8;
+  
+  const setUserInterval = () => {
+    currentInterval = Number(document.getElementById("maxInterval").value);
+  }
+  //add an event listener to the interval selector (so range of notes gets highlighted)
+  const userIntervalSelector = document.getElementById("maxInterval");
+  userIntervalSelector.addEventListener('change',setUserInterval);
 
+  //this function is for testing purposes only
+  const log = () => {
+    console.log('changed');
+  }
+  
+
+  //using temp values here for testing purposes. userOctaves will ultimately be populated by getUserOctaves function  
+  let userOctaves = [octave3];
+
+  //populates the userOctaves array with the selected octaves
+  const setUserOctaves = () => {
+    userOctaves = [];
+    const checked = document.querySelectorAll(`input[type="checkbox"]:checked`);
+    checked.forEach(checkbox => {
+      //iterate over all checked checkboxes and for each one, return its id converted from a string into a variable and push that into userOctaves.  That will push the note array stored in each variable into userOctaves
+      userOctaves.push(eval(checkbox.id));
+    })
+    console.log(userOctaves);
   }
 
-  const getIntervalNotes
-
-  testNote();
-
   
 
+  //add an event listener to the checkbox fieldset
+  const octaveSelector = document.querySelector('fieldset');
+  //on change, update the value of userOctaves by running setUserOctaves function
+  octaveSelector.addEventListener('change',setUserOctaves);
+
+  //pick a random note from the userOctaves array
+  const getRandomNote = () => {
+    const firstNoteArray = userOctaves.flat();
+    const randomNoteIndex = Math.floor(Math.random() * firstNoteArray.length);
+    const randomNote = firstNoteArray[randomNoteIndex];
+    return randomNote
+  }
   
+  const playFirstNote = () => {
+    
+    //audio.play(getRandomNote())
+    console.log(getRandomNote());
+  }
+
+  const compareNote = () => {
+
+    
+  }
+
+  //this button is for testing purposes only
+  const testButton = document.querySelector('button');
+  testButton.addEventListener('click',playFirstNote);
 
   //listen for user click on interval buttons
 
   //if clicked button id matches note id, message 'correct', otherwise message 'incorrect.'
 
 </script>
+</body>
 </html>
