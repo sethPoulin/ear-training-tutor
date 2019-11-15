@@ -5,60 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<section>
-  <button>Get interval length</button>
-  <form action="">
-      <fieldset>
-          <legend>Octaves</legend>
-        
-          <label for="octave1">Octave 1</label>
-          <input type="checkbox" id="octave1" name="octave" value="octave1">
-        
-          <label for="octave2">Octave 2</label>
-          <input type="checkbox" id="octave2" name="octave" value="octave2">
-        
-          <label for="octave3">Octave 3</label>
-          <input type="checkbox" id="octave3" name="octave" value="octave3">
-        
-          <label for="octave4">Octave 4</label>
-          <input type="checkbox" id="octave4" name="octave" value="octave4" checked>
-        
-          <label for="octave5">Octave 5</label>
-          <input type="checkbox" id="octave5" name="octave" value="octave5">
+  <section class="settings">
+    <button>Get interval length</button>
+    
+    <form action="">
+      
+      <fieldset name="octaves">
+        <legend>Octaves</legend>
+      
+        <label for="octave1">Octave 1</label>
+        <input type="checkbox" id="octave1" name="octave" value="octave1">
+      
+        <label for="octave2">Octave 2</label>
+        <input type="checkbox" id="octave2" name="octave" value="octave2">
+      
+        <label for="octave3">Octave 3</label>
+        <input type="checkbox" id="octave3" name="octave" value="octave3">
+      
+        <label for="octave4">Octave 4</label>
+        <input type="checkbox" id="octave4" name="octave" value="octave4" checked>
+      
+        <label for="octave5">Octave 5</label>
+        <input type="checkbox" id="octave5" name="octave" value="octave5">
 
-          <label for="octave6">Octave 6</label>
-          <input type="checkbox" id="octave6" name="octave" value="octave6">
-          
-          <label for="octave7">Octave 7</label>
-          <input type="checkbox" id="octave7" name="octave" value="octave7">
-        </fieldset>
-        <label for="maxInterval">Select the max interval length (in semitones):</label>
-        <select name="maxInterval" id="maxInterval">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8" selected="true">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-          <option value="18">18</option>
-          <option value="19">19</option>
-          <option value="20">20</option>
-        </select>
-  </form>
-</section>
+        <label for="octave6">Octave 6</label>
+        <input type="checkbox" id="octave6" name="octave" value="octave6">
+        
+        <label for="octave7">Octave 7</label>
+        <input type="checkbox" id="octave7" name="octave" value="octave7">
+
+        <div class="octaveMessage">
+          <!-- <p class="placeholder" aria-hidden=true>Placeholder text</p>  -->
+          <p>Please select at least one octave.</p>
+          <p class="hidden">Octaves must be adjacent.</p>
+        </div>
+
+      </fieldset>
+      
+      <label for="maxInterval">Select the max interval length (in semitones):</label>
+      <select name="maxInterval" id="maxInterval">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8" selected="true">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+      </select>
+    </form>
+  </section>
+  <section class="game">
+    <div class="keyboard">
+      <svg xml:space="preserve" width="161px" height="120"><!--
+    
+        Copyright (c)  2005 Lauri Kaila.
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.2
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+        A copy of the license is included in the section entitled "GNU
+        Free Documentation License".
+        
+        Intented to create a keyboard where key widths are
+        accurately in position. 
+        
+        See http://www.mathpages.com/home/kmath043.htm
+        for the math.
+        
+        This keyboard has following properties (x=octave width).
+        1. All white keys have equal width in front (W=x/7).
+        2. All black keys have equal width (B=x/12).
+        3. The narrow part of white keys C, D and E is W - B*2/3
+        4. The narrow part of white keys F, G, A, and B is W - B*3/4
+        
+        --><!-- White keys  --><rect style="fill:white;stroke:black" x="0" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="23" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="46" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="69" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="92" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="115" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="138" y="0" width="23" height="120"/><!-- Black keys (overlap with the white keys) --><rect style="fill:black;stroke:black" x="14.33333" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="41.66666" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="82.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="108.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="134.75" y="0" width="13" height="80"/></svg>
+      
+      <svg xml:space="preserve" width="161px" height="120"><!--
+        --><!-- White keys  --><rect style="fill:white;stroke:black" x="0" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="23" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="46" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="69" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="92" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="115" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="138" y="0" width="23" height="120"/><!-- Black keys (overlap with the white keys) --><rect style="fill:black;stroke:black" x="14.33333" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="41.66666" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="82.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="108.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="134.75" y="0" width="13" height="80"/></svg>
+      
+      <svg xml:space="preserve" width="161px" height="120"><!--
+        --><!-- White keys  --><rect style="fill:white;stroke:black" x="0" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="23" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="46" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="69" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="92" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="115" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="138" y="0" width="23" height="120"/><!-- Black keys (overlap with the white keys) --><rect style="fill:black;stroke:black" x="14.33333" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="41.66666" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="82.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="108.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="134.75" y="0" width="13" height="80"/></svg>
+
+      <svg xml:space="preserve" width="161px" height="120"><!--
+        --><!-- White keys  --><rect style="fill:white;stroke:black" x="0" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="23" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="46" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="69" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="92" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="115" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="138" y="0" width="23" height="120"/><!-- Black keys (overlap with the white keys) --><rect style="fill:black;stroke:black" x="14.33333" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="41.66666" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="82.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="108.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="134.75" y="0" width="13" height="80"/></svg>
+    </div>
+  </section>
 
 <script>
 
@@ -68,16 +111,26 @@
   const intervals = {
     1: 'semitone',
     2: 'whole tone',
-    5: 'perfect fifth'
+    5: 'perfect fifth',
+    7: 'major seventh',
+    8: 'minor seventh'
   }
 
-  const octave1 = ['a1','a#1','b1','c1','c#1','d#1','e1','f1','f#1','g1','g#1'];
-  const octave2 = ['a2','a#2','b2','c2','c#2','d#2','e2','f2','f#2','g2','g#2'];
-  const octave3 = ['a3','a#3','b3','c3','c#3','d#3','e3','f3','f#3','g3','g#3'];
-  const octave4 = ['a4','a#4','b4','c4','c#4','d#4','e4','f4','f#4','g4','g#4'];
-  const octave5 = ['a5','a#5','b5','c5','c#5','d#5','e5','f5','f#5','g5','g#5'];
-  const octave6 = ['a6','a#6','b6','c6','c#6','d#6','e6','f6','f#6','g6','g#6'];
-  const octave7 = ['a7','a#7','b7','c7','c#7','d#7','e7','f7','f#7','g7','g#7'];
+  //a maximum of 4 octaves can be chosen.  
+  //These must be consecutive.  If user tries to select non-consecutive octaves, display an error message.
+  
+ 
+
+
+  const octaves = {
+   octave1 : ['a1','a#1','b1','c1','c#1','d#1','e1','f1','f#1','g1','g#1'],
+   octave2 : ['a2','a#2','b2','c2','c#2','d#2','e2','f2','f#2','g2','g#2'],
+   octave3 : ['a3','a#3','b3','c3','c#3','d#3','e3','f3','f#3','g3','g#3'],
+   octave4 : ['a4','a#4','b4','c4','c#4','d#4','e4','f4','f#4','g4','g#4'],
+   octave5 : ['a5','a#5','b5','c5','c#5','d#5','e5','f5','f#5','g5','g#5'],
+   octave6 : ['a6','a#6','b6','c6','c#6','d#6','e6','f6','f#6','g6','g#6'],
+   octave7 : ['a7','a#7','b7','c7','c#7','d#7','e7','f7','f#7','g7','g#7']
+  }
   // etc.
 
   //prompt user to choose number of octaves and music interval length (in notes).  Store the choice in a variable userIntervalLength, e.g. 3.
@@ -91,11 +144,34 @@
   //   userOctaves.push(userSelection);
   // }
 
+const getSoundAndFadeAudio = (pianoNoteId) => {
+
+  const sound = document.getElementById(pianoNoteId);
+
+  // Set the point in playback that fadeout begins. This is for a 2 second fade out.
+  // const fadePoint = sound.duration - 2; 
+
+  const fadeAudio = setInterval(() => {
+
+      // Only fade if past 2 seconds and not at zero already.
+      if ((sound.currentTime >= 2) && (sound.volume !== 0.0)) {
+          sound.volume -= 0.1;
+      }
+      // When volume reaches zero, exit the function.
+      // {
+      //     clearInterval(fadeAudio);
+      // }
+    //fade interval is one second
+  }, 1000);
+
+}
+
   
 
   //we will eventually use this to highlight the range of possible notes on the keyboard
   let currentInterval = 8;
   
+  //sets the currentInterval to whatever the number is in the maxInterval field
   const setUserInterval = () => {
     currentInterval = Number(document.getElementById("maxInterval").value);
   }
@@ -107,20 +183,64 @@
   const log = () => {
     console.log('changed');
   }
+ 
+
+  const checkOctavesAreAdjacent = function(){
+    const allOctaves = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    const checkedOctaves = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'));
+    if(checkedOctaves.length === 0 || checkedOctaves.length === 1) return;
+    if(checkedOctaves.length > 4){
+      //print an error message and return
+    };
+    const lowestChecked = allOctaves.find((el)=> {
+      return el.checked;
+    });
+
+    const lowestIndex = allOctaves.indexOf(lowestChecked);
+
+    const highestChecked = [...allOctaves].reverse().find((el)=> {
+      return el.checked;
+    });
+    const highestIndex = allOctaves.indexOf(highestChecked);
+
+    const allCheckedOctaves = allOctaves.filter((el)=>{
+      return el.checked;
+    });
+    const allCheckedOctavesIndexes = allCheckedOctaves.map((el)=>{
+      return allOctaves.indexOf(el);
+    });
+
+    //this is just an array of consecutive numbers that has the same starting value and is the same length as allCHeckedOctavesIndexes
+    const consecutiveArray = [];
+    for(let i=0;i<allCheckedOctavesIndexes.length;i++){
+      consecutiveArray.push(allCheckedOctavesIndexes[0]+i);
+    };
+    //check if the consecutive array and the checked indexes array are equal
+    if(JSON.stringify(consecutiveArray) === JSON.stringify(allCheckedOctavesIndexes)){
+      return true;
+    } else {
+      return false;
+    };
+  }
+    
+
+
   
 
-  //using temp values here for testing purposes. userOctaves will ultimately be populated by getUserOctaves function  
-  let userOctaves = [octave3];
+  //you have 2 arrays you compare: 1 with all the index numbers of the checked arrays, and one autogenerated from the min index to the max index.  If they're identical the test passes.
+
+
 
   //populates the userOctaves array with the selected octaves
-  const setUserOctaves = () => {
-    userOctaves = [];
+  const setUserOctaves = function(){
+    const userOctaves = [];
     const checked = document.querySelectorAll(`input[type="checkbox"]:checked`);
     checked.forEach(checkbox => {
       //iterate over all checked checkboxes and for each one, return its id converted from a string into a variable and push that into userOctaves.  That will push the note array stored in each variable into userOctaves
-      userOctaves.push(eval(checkbox.id));
+      userOctaves.push(...octaves[checkbox.id]);
     })
     console.log(userOctaves);
+    console.log(checkOctavesAreAdjacent());
   }
 
   
