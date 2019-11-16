@@ -102,6 +102,10 @@
         --><!-- White keys  --><rect style="fill:white;stroke:black" x="0" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="23" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="46" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="69" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="92" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="115" y="0" width="23" height="120"/><rect style="fill:white;stroke:black" x="138" y="0" width="23" height="120"/><!-- Black keys (overlap with the white keys) --><rect style="fill:black;stroke:black" x="14.33333" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="41.66666" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="82.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="108.25" y="0" width="13" height="80"/><rect style="fill:black;stroke:black" x="134.75" y="0" width="13" height="80"/></svg>
     </div>
   </section>
+  <button class='testButton'>Test</button>
+
+  <audio data-key="test" src="assets/UprightPianoKW-small-bright-SFZ-20190703/samples/C5vH.wav"></audio>
+  <audio data-key="test2" src="assets/UprightPianoKW-small-bright-SFZ-20190703/samples/B7vH.wav"></audio>
 
 <script>
 
@@ -144,27 +148,66 @@
   //   userOctaves.push(userSelection);
   // }
 
-const getSoundAndFadeAudio = (pianoNoteId) => {
+//Pre-loads all notes so that user interaction is not required for notes to be played.
+const loadAllNotes = function(){
+  const sounds = document.querySelectorAll(`audio`);
+  sounds.forEach((sample)=>sample.load());
+};
 
-  const sound = document.getElementById(pianoNoteId);
+//this is for testing purposes only.  The start button will eventually trigger loadAllNotes
+const testButton = document.querySelector('button.testButton');
+testButton.addEventListener('click',loadAllNotes);
+
+const fadeOut = function(sample){
+  let vol = sample.volume;
+  setInterval(function(){    
+    if (vol > 0) {
+      vol -= 0.05;
+      sample.volume = vol;
+    }
+    else {
+      // Stop the setInterval when 0 is reached
+      clearInterval(fadeout);
+    }
+  },1000);
+};
+
+const playAndFade = function(sample){
+  sample.play();
+
+};
+
+const sound = document.querySelector(`audio[data-key=test]`);
+const sound2 = document.querySelector(`audio[data-key=test2]`);
+setTimeout(() => sound.play(),3000);
+setTimeout(() => fadeOut(sound),4000);
+
+// setTimeout(() => sound2.play(),4000);
+
+
+// const getSoundAndFadeAudio = () => {
+
+//   const sound = document.querySelector(`audio[data-key=test]`);
+//   sound.play();
 
   // Set the point in playback that fadeout begins. This is for a 2 second fade out.
   // const fadePoint = sound.duration - 2; 
 
-  const fadeAudio = setInterval(() => {
+  // const fadeAudio = (note => setInterval(() => {
 
-      // Only fade if past 2 seconds and not at zero already.
-      if ((sound.currentTime >= 2) && (sound.volume !== 0.0)) {
-          sound.volume -= 0.1;
-      }
-      // When volume reaches zero, exit the function.
-      // {
-      //     clearInterval(fadeAudio);
-      // }
-    //fade interval is one second
-  }, 1000);
+  //     // Only fade if past 2 seconds and not at zero already.
+  //     if ((note.currentTime >= 1) && (note.volume !== 0.0)) {
+  //         note.volume -= 0.1;
+  //     }
+  //     // When volume reaches zero, exit the function.
+  //     // {
+  //     //     clearInterval(fadeAudio);
+  //     // }
+  //   //fade interval is one second
+  // }, 200));
 
-}
+// }
+// getSoundAndFadeAudio();
 
   
 
@@ -270,8 +313,8 @@ const getSoundAndFadeAudio = (pianoNoteId) => {
   }
 
   //this button is for testing purposes only
-  const testButton = document.querySelector('button');
-  testButton.addEventListener('click',playFirstNote);
+  const testButton2 = document.querySelector('button');
+  testButton2.addEventListener('click',playFirstNote);
 
   //listen for user click on interval buttons
 
