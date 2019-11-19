@@ -30,7 +30,7 @@ const octaves = {
 const loadAllNotes = function(){ 
   userOctaves.forEach((note) => {
     let currentNote = document.querySelector(`audio[data-key=${note}`);
-    console.log(currentNote);
+    // console.log(currentNote);
     currentNote.load()});
     
 };
@@ -54,14 +54,15 @@ setInterval(function(){
 
 
 //we will eventually use this to highlight the range of possible notes on the keyboard
-let currentInterval = 8;
+// let currentInterval = 8;
 //sets the currentInterval to whatever the number is in the maxInterval field
-const setUserInterval = () => {
-  currentInterval = Number(document.getElementById("maxInterval").value);
-}
+// const setUserInterval = () => {
+//   currentInterval = Number(document.getElementById("maxInterval").value);
+// }
+
 //add an event listener to the interval selector (so range of notes gets highlighted)
-const userIntervalSelector = document.getElementById("maxInterval");
-userIntervalSelector.addEventListener('change',setUserInterval);
+// const userIntervalSelector = document.getElementById("maxInterval");
+// userIntervalSelector.addEventListener('change',setUserInterval);
 
 
 const checkOctavesAreAdjacent = function(){
@@ -113,15 +114,17 @@ octaveSelector.addEventListener('change',setUserOctaves);
 //pick a random note from the userOctaves array
 const getRandomNote = () => {
   const randomNoteIndex = Math.floor(Math.random() * userOctaves.length);
-  const randomNote = userOctaves[randomNoteIndex];
+  randomNote = userOctaves[randomNoteIndex];
   console.log(randomNote);
   return randomNote;
 }
 
+let firstNote = '';
+
 //play the first randomNote
 const playFirstNote = () => {
   loadAllNotes(); 
-  const firstNote = getRandomNote();
+  firstNote = getRandomNote();
   const firstAudio = document.querySelector(`audio[data-key=${firstNote}`);
   firstAudio.play();
   setTimeout(() => fadeOut(firstAudio),1500);
@@ -130,10 +133,31 @@ const playFirstNote = () => {
 //Once the first random note is played, we create an array of possible second notes based on the user interval.  If the interval is 8 we add eight notes ahead of the first note and eight notes behind the first note, all selected from the userOctaves.  If it's not possible to select eight notes in either direction, we add as many as we can until the end of the array is reached.
 
 //The second random note is played.
+const secondRandomNoteArray = [];
+
+const getSecondRandomNote = function(){
+  //sets firstNoteIndex to the index in the userOctaves array of the first random note played
+  secondRandomNoteArray.length = 0;
+  console.log(firstNote);
+  const firstNoteIndex = userOctaves.indexOf(firstNote);
+  console.log('first note index:',firstNoteIndex);
+  //sets currentInterval to whatever is selected in the interval selector.
+  const currentInterval = Number(document.getElementById("maxInterval").value);
+  console.log('first note index + currentInterval + 1',firstNoteIndex+currentInterval+1);
+  const firstBatchofNotes = userOctaves.slice(firstNoteIndex, firstNoteIndex+currentInterval+1)
+  secondRandomNoteArray.push(...firstBatchofNotes);
+  console.log('secondRandomNoteArray max nums only:',secondRandomNoteArray)
+  const indexStart = Math.max(0,firstNoteIndex - currentInterval);
+  console.log('indexStart:',indexStart);
+  const secondBatchofNotes = (userOctaves.slice(indexStart, firstNoteIndex));
+  secondRandomNoteArray.unshift(...secondBatchofNotes);
+  console.log('secondRandomNoteArray with min nums:',secondRandomNoteArray);
+
+}
 
 
-const compareNote = () => {
-
+const compareNote = (note) => {
+  
   
 }
 
