@@ -122,37 +122,52 @@ const getRandomNote = () => {
 let firstNote = '';
 
 //play the first randomNote
-const playFirstNote = () => {
+const playNotes = () => {
   loadAllNotes(); 
   firstNote = getRandomNote();
   const firstAudio = document.querySelector(`audio[data-key=${firstNote}`);
   firstAudio.play();
   setTimeout(() => fadeOut(firstAudio),1500);
+  setTimeout(() => playSecondRandomNote(), 4000);
 }
 
 //Once the first random note is played, we create an array of possible second notes based on the user interval.  If the interval is 8 we add eight notes ahead of the first note and eight notes behind the first note, all selected from the userOctaves.  If it's not possible to select eight notes in either direction, we add as many as we can until the end of the array is reached.
 
-//The second random note is played.
 const secondRandomNoteArray = [];
-
-const getSecondRandomNote = function(){
+  
+const getSecondRandomNoteArray = function(){
   //sets firstNoteIndex to the index in the userOctaves array of the first random note played
   secondRandomNoteArray.length = 0;
-  console.log(firstNote);
+  
   const firstNoteIndex = userOctaves.indexOf(firstNote);
-  console.log('first note index:',firstNoteIndex);
   //sets currentInterval to whatever is selected in the interval selector.
   const currentInterval = Number(document.getElementById("maxInterval").value);
-  console.log('first note index + currentInterval + 1',firstNoteIndex+currentInterval+1);
+  
   const firstBatchofNotes = userOctaves.slice(firstNoteIndex, firstNoteIndex+currentInterval+1)
+  
   secondRandomNoteArray.push(...firstBatchofNotes);
-  console.log('secondRandomNoteArray max nums only:',secondRandomNoteArray)
+  
   const indexStart = Math.max(0,firstNoteIndex - currentInterval);
-  console.log('indexStart:',indexStart);
+  
   const secondBatchofNotes = (userOctaves.slice(indexStart, firstNoteIndex));
+  
   secondRandomNoteArray.unshift(...secondBatchofNotes);
-  console.log('secondRandomNoteArray with min nums:',secondRandomNoteArray);
 
+}
+  
+
+const playSecondRandomNote = function(){
+  getSecondRandomNoteArray();
+
+  const randomIndex = Math.floor(Math.random() * secondRandomNoteArray.length);
+   
+  const secondRandomNote = secondRandomNoteArray[randomIndex];
+  
+  const secondNoteToPlay =  document.querySelector(`audio[data-key=${secondRandomNote}]`);
+  
+  secondNoteToPlay.play();
+  
+  setTimeout(() => fadeOut(secondNoteToPlay),1500);
 }
 
 
@@ -163,7 +178,7 @@ const compareNote = (note) => {
 
 
 const startButton = document.querySelector('button.start');
-startButton.addEventListener('click',playFirstNote);
+startButton.addEventListener('click',playNotes);
 
 //listen for user clicks on keyboard
 
