@@ -241,6 +241,19 @@ section.settings, section.game {
   transition: all 0.7s;
 }
 
+rect {
+  stroke: black;
+  fill: white;
+}
+
+rect.black {
+  fill: black;
+}
+
+rect:hover {
+  fill: red;
+}
+
 .hidden {
   display: none;
 }
