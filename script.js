@@ -15,20 +15,44 @@ const intervals = {
 
 
 const octaves = {
- octave0 : ['a0','a-0','b0'],
- octave1 : ['a1','a-1','b1','c1','c-1','d-1','e1','f1','f-1','g1','g-1'],
- octave2 : ['a2','a-2','b2','c2','c-2','d-2','e2','f2','f-2','g2','g-2'],
- octave3 : ['a3','a-3','b3','c3','c-3','d-3','e3','f3','f-3','g3','g-3'],
- octave4 : ['a4','a-4','b4','c4','c-4','d-4','e4','f4','f-4','g4','g-4'],
- octave5 : ['a5','a-5','b5','c5','c-5','d-5','e5','f5','f-5','g5','g-5'],
- octave6 : ['a6','a-6','b6','c6','c-6','d-6','e6','f6','f-6','g6','g-6'],
- octave7 : ['a7','c7','c-7','d-7','e7','f7','f-7','g7','g-7']
+//  octave0 : ['a0','a-0','b0'],
+ octave1 : ['c1','c-1','d1','d-1','e1','f1','f-1','g1','g-1','a2','a-2','b2'],
+ octave2 : ['c2','c-2','d2','d-2','e2','f2','f-2','g2','g-2','a3','a-3','b3'],
+ octave3 : ['c3','c-3','d3','d-3','e3','f3','f-3','g3','g-3','a4','a-4','b4'],
+ octave4 : ['c4','c-4','d4','d-4','e4','f4','f-4','g4','g-4','a5','a-5','b5'],
+ octave5 : ['c5','c-5','d5','d-5','e5','f5','f-5','g5','g-5','a6','a-6','b6'],
+ octave6 : ['c6','c-6','d6','d-6','e6','f6','f-6','g6','g-6','a7','a-7','b7'],
+ octave7 : ['c7','c-7','d7','d-7','e7','f7','f-7','g7','g-7','a8','a-8','b8'],
+//  octave8 : ['c8']
+}
+
+const whiteKeysArr = document.querySelectorAll('svg rect:not(.black)');
+const blackKeysArr = document.querySelectorAll('svg rect.black');
+console.log('whiteKeysArr:',whiteKeysArr);
+console.log('blackKeysArr:',blackKeysArr);
+
+
+// 
+
+
+const assignNotesToBrowserKeys = function(arrOfOctave) {
+  for(let i = 0; i < 5; i = i + 2) {
+    whiteKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i]}`);
+    blackKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i+1]}`);
+  };
+  for(let i = 5; i < arrOfOctave.length - 1; i = i + 2) {
+    whiteKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i]}`);
+    blackKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i+1]}`);
+  };
+  // for(let i=)
 }
 
 
-//Pre-loads all notes in userOctaves so that user interaction is not required for notes to be played.
+
+
+//Pre-loads all notes in userOctaveNotes so that user interaction is not required for notes to be played.
 const loadAllNotes = function(){ 
-  userOctaves.forEach((note) => {
+  userOctaveNotes.forEach((note) => {
     let currentNote = document.querySelector(`audio[data-key=${note}`);
     // console.log(currentNote);
     currentNote.load()});
@@ -49,7 +73,7 @@ setInterval(function(){
     // Stop the setInterval when 0 is reached
     clearInterval(fadeOut);
   }
-},100);
+},75);
 };
 
 
@@ -91,30 +115,30 @@ const checkOctavesAreAdjacent = function(){
   };
 }
 
-const userOctaves = [];
-//populates the userOctaves array with the selected octaves
+const userOctaveNotes = [];
+//populates the userOctaveNotes array with the selected octaves
 const setUserOctaves = function(){
-  userOctaves.length = 0;
+  userOctaveNotes.length = 0;
   const checked = document.querySelectorAll(`input[type="checkbox"]:checked`);
   checked.forEach(checkbox => {
-    //iterate over all checked checkboxes and for each one, return its id converted from a string into a variable and push that into userOctaves.  That will push the note array stored in each variable into userOctaves
-    userOctaves.push(...octaves[checkbox.id]);
+    //iterate over all checked checkboxes and for each one, return its id converted from a string into a variable and push that into userOctaveNotes.  That will push the note array stored in each variable into userOctaveNotes
+    userOctaveNotes.push(...octaves[checkbox.id]);
   })
-  console.log(userOctaves);
+  console.log(userOctaveNotes);
   console.log(checkOctavesAreAdjacent());
-  return userOctaves;
+  return userOctaveNotes;
 }
 
 setUserOctaves();
 
-//update the userOctaves array every time there is a change to the octaves field
+//update the userOctaveNotes array every time there is a change to the octaves field
 const octaveSelector = document.querySelector('fieldset');
 octaveSelector.addEventListener('change',setUserOctaves);
 
-//pick a random note from the userOctaves array
+//pick a random note from the userOctaveNotes array
 const getRandomNote = () => {
-  const randomNoteIndex = Math.floor(Math.random() * userOctaves.length);
-  randomNote = userOctaves[randomNoteIndex];
+  const randomNoteIndex = Math.floor(Math.random() * userOctaveNotes.length);
+  randomNote = userOctaveNotes[randomNoteIndex];
   console.log(randomNote);
   return randomNote;
 }
@@ -131,25 +155,25 @@ const playNotes = () => {
   setTimeout(() => playSecondRandomNote(), 4000);
 }
 
-//Once the first random note is played, we create an array of possible second notes based on the user interval.  If the interval is 8 we add eight notes ahead of the first note and eight notes behind the first note, all selected from the userOctaves.  If it's not possible to select eight notes in either direction, we add as many as we can until the end of the array is reached.
+//Once the first random note is played, we create an array of possible second notes based on the user interval.  If the interval is 8 we add eight notes ahead of the first note and eight notes behind the first note, all selected from the userOctaveNotes.  If it's not possible to select eight notes in either direction, we add as many as we can until the end of the array is reached.
 
 const secondRandomNoteArray = [];
   
 const getSecondRandomNoteArray = function(){
-  //sets firstNoteIndex to the index in the userOctaves array of the first random note played
+  //sets firstNoteIndex to the index in the userOctaveNotes array of the first random note played
   secondRandomNoteArray.length = 0;
   
-  const firstNoteIndex = userOctaves.indexOf(firstNote);
+  const firstNoteIndex = userOctaveNotes.indexOf(firstNote);
   //sets currentInterval to whatever is selected in the interval selector.
   const currentInterval = Number(document.getElementById("maxInterval").value);
   
-  const firstBatchofNotes = userOctaves.slice(firstNoteIndex, firstNoteIndex+currentInterval+1)
+  const firstBatchofNotes = userOctaveNotes.slice(firstNoteIndex, firstNoteIndex+currentInterval+1)
   
   secondRandomNoteArray.push(...firstBatchofNotes);
   
   const indexStart = Math.max(0,firstNoteIndex - currentInterval);
   
-  const secondBatchofNotes = (userOctaves.slice(indexStart, firstNoteIndex));
+  const secondBatchofNotes = (userOctaveNotes.slice(indexStart, firstNoteIndex));
   
   secondRandomNoteArray.unshift(...secondBatchofNotes);
 
@@ -164,6 +188,8 @@ const playSecondRandomNote = function(){
   const secondRandomNote = secondRandomNoteArray[randomIndex];
   
   const secondNoteToPlay =  document.querySelector(`audio[data-key=${secondRandomNote}]`);
+
+  console.log('secondRandomNote:',secondRandomNote);
   
   secondNoteToPlay.play();
   
