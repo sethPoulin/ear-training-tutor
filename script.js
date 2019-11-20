@@ -16,38 +16,95 @@ const intervals = {
 
 const octaves = {
 //  octave0 : ['a0','a-0','b0'],
- octave1 : ['c1','c-1','d1','d-1','e1','f1','f-1','g1','g-1','a2','a-2','b2'],
- octave2 : ['c2','c-2','d2','d-2','e2','f2','f-2','g2','g-2','a3','a-3','b3'],
- octave3 : ['c3','c-3','d3','d-3','e3','f3','f-3','g3','g-3','a4','a-4','b4'],
- octave4 : ['c4','c-4','d4','d-4','e4','f4','f-4','g4','g-4','a5','a-5','b5'],
- octave5 : ['c5','c-5','d5','d-5','e5','f5','f-5','g5','g-5','a6','a-6','b6'],
- octave6 : ['c6','c-6','d6','d-6','e6','f6','f-6','g6','g-6','a7','a-7','b7'],
- octave7 : ['c7','c-7','d7','d-7','e7','f7','f-7','g7','g-7','a8','a-8','b8'],
+ octave1 : ['c1','c-1','d1','d-1','e1','f1','f-1','g1','g-1','a1','a-1','b1'],
+ octave2 : ['c2','c-2','d2','d-2','e2','f2','f-2','g2','g-2','a2','a-2','b2'],
+ octave3 : ['c3','c-3','d3','d-3','e3','f3','f-3','g3','g-3','a3','a-3','b3'],
+ octave4 : ['c4','c-4','d4','d-4','e4','f4','f-4','g4','g-4','a4','a-4','b4'],
+ octave5 : ['c5','c-5','d5','d-5','e5','f5','f-5','g5','g-5','a5','a-5','b5'],
+ octave6 : ['c6','c-6','d6','d-6','e6','f6','f-6','g6','g-6','a6','a-6','b6'],
+ octave7 : ['c7','c-7','d7','d-7','e7','f7','f-7','g7','g-7','a7','a-7','b7'],
 //  octave8 : ['c8']
 }
 
-const whiteKeysArr = document.querySelectorAll('svg rect:not(.black)');
-const blackKeysArr = document.querySelectorAll('svg rect.black');
-console.log('whiteKeysArr:',whiteKeysArr);
-console.log('blackKeysArr:',blackKeysArr);
+
+
 
 
 // 
 
 
-const assignNotesToBrowserKeys = function(arrOfOctave) {
-  for(let i = 0; i < 5; i = i + 2) {
-    whiteKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i]}`);
-    blackKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i+1]}`);
-  };
-  for(let i = 5; i < arrOfOctave.length - 1; i = i + 2) {
-    whiteKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i]}`);
-    blackKeysArr[i / 2].setAttribute('data-key',`${arrOfOctave[i+1]}`);
-  };
-  // for(let i=)
+
+const assignNotesToBrowserKeys = function() {
+  const whiteKeysArr = Array.from(document.querySelectorAll('svg rect:not(.black)'));
+  const blackKeysArr = Array.from(document.querySelectorAll('svg rect.black'));
+  const keyPattern = [0,1,0,1,0,0,1,0,1,0,1,0];
+  const notesToMapArr = [...userOctaveNotes];
+  const orderedNotesArr = [];
+  while(whiteKeysArr.length > 0){
+    keyPattern.map((key) => {
+      if(key===0){
+        const keyToAdd = (whiteKeysArr.splice(0,1))[0];
+        console.log('whiteKeysArr:',whiteKeysArr);
+        // console.log(keyToAdd);
+        keyToAdd.setAttribute(`data-key`,`${notesToMapArr[0]}`);
+        keyToAdd.addEventListener('click',playNote);
+        notesToMapArr.splice(0,1);
+        orderedNotesArr.push(keyToAdd);  
+      }
+      if(key===1){
+        const keyToAdd = blackKeysArr.splice(0,1)[0];
+        keyToAdd.setAttribute(`data-key`,`${notesToMapArr[0]}`);
+        keyToAdd.addEventListener('click',playNote);
+        notesToMapArr.splice(0,1);
+        orderedNotesArr.push(keyToAdd);
+      }
+      console.log(orderedNotesArr);
+    })
+    console.log('loop about to restart and whiteKeysArr is:',whiteKeysArr.length);
+    console.log('notesToMapArr.length:',notesToMapArr.length);
+  }
+  
 }
 
+function playNote (e){
+  const note = document.querySelector(`audio[data-key=${e.target.getAttribute('data-key')}]`);
+  note.currentTime = 0;
+  note.volume = 1;
+  note.play();
+  fadeOut(note);
+};
 
+// keyToAdd.setAttribute(`[key-data=${notesToMapArr[0]}]`);
+
+//1. Put all white keys in an array. DONE
+//2. Put all black keys in an array DONE
+//3. Create an array that establishes the pattern.DONE
+//4. WHILE there are elements in the notes array, keep running the function below.
+//4. Map over the pattern array and if you hit a black key, REMOVE the first item from the black keys array and push it into the properly arranged key array.  If you hit a white key, do the same from the white key array.
+//5. For the map: the first thing that runs is: if there is no element in the notes array, return.
+
+// ******************
+
+// console.log('whiteKeysArr:',whiteKeysArr);
+//   console.log('blackKeysArr:',blackKeysArr);
+//   for(let i = 0; i < 5; i = i + 2) {
+//     whiteKeysArr[i / 2].setAttribute('data-key',`${arr[i]}`);
+//     blackKeysArr[i / 2].setAttribute('data-key',`${arr[i+1]}`);
+//     console.log(i);
+//   };
+  
+//   whiteKeysArr[4].setAttribute('data-key',`${arr[5]}`);
+//   console.log('second part started.  i is now: 5');
+  
+//   for(let i = 6; i < 12; i = i + 2) {
+//     whiteKeysArr[i / 2].setAttribute('data-key',`${arr[i]}`);
+//     blackKeysArr[i / 2].setAttribute('data-key',`${arr[i+1]}`);
+//     console.log('Third part started, i is now:',i);
+//   };
+//   console.log('whiteKeysArr:',whiteKeysArr);
+//   console.log('blackKeysArr:',blackKeysArr);
+
+// ****************
 
 
 //Pre-loads all notes in userOctaveNotes so that user interaction is not required for notes to be played.
@@ -64,16 +121,11 @@ const fadeOut = function(sample){
 let vol = sample.volume;
 setInterval(function(){ 
   //we set the min volume to be 0.05 because if we use 0, when the function repeats for the last time it will bring the volume down to below 0, which cause an error (the else will never get a chance to run).  
-  if (vol > 0.05) {
-    vol -= 0.05;
+  if (vol > 0) {
+    vol = Math.max((vol - 0.03),0);
     sample.volume = vol;
     console.log(vol);
-  }
-  else {
-    // Stop the setInterval when 0 is reached
-    clearInterval(fadeOut);
-  }
-},75);
+  }},50);
 };
 
 
@@ -146,7 +198,7 @@ const getRandomNote = () => {
 let firstNote = '';
 
 //play the first randomNote
-const playNotes = () => {
+const playRandomNotes = () => {
   loadAllNotes(); 
   firstNote = getRandomNote();
   const firstAudio = document.querySelector(`audio[data-key=${firstNote}`);
@@ -204,7 +256,7 @@ const compareNote = (note) => {
 
 
 const startButton = document.querySelector('button.start');
-startButton.addEventListener('click',playNotes);
+startButton.addEventListener('click',playRandomNotes);
 
 //listen for user clicks on keyboard
 
