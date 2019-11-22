@@ -223,7 +223,7 @@ textarea {
 
 body {
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 40px auto 0;
 }
 
 section.settings, section.game {
@@ -246,16 +246,24 @@ rect {
   fill: white;
 }
 
-rect.black {
+.black {
   fill: black;
 }
 
-.fillBlue {
-  fill: blue;
+.keyboard rect.firstNote {
+  fill: #5296c1;
+}
+
+.correct, rect:hover.correct {
+  fill: #239f3c;
+}
+
+.incorrect, rect:hover.incorrect {
+  fill: #871919;
 }
 
 rect:hover {
-  fill: red;
+  fill: #3f3f3f;
 }
 
 .hidden {

@@ -11,9 +11,6 @@ const intervals = {
 //a maximum of 4 octaves can be chosen.  
 //These must be consecutive.  If user tries to select non-consecutive octaves, display an error message.
 
-
-
-
 const octaves = {
 //  octave0 : ['a0','a-0','b0'],
  octave1 : ['c1','c-1','d1','d-1','e1','f1','f-1','g1','g-1','a1','a-1','b1'],
@@ -40,17 +37,17 @@ const assignNotesToBrowserKeys = function() {
         keyToAdd.addEventListener('click',playNote);
         notesToMapArr.splice(0,1);
         orderedNotesArr.push(keyToAdd);  
-      }
+      };
       if(key===1){
         const keyToAdd = blackKeysArr.splice(0,1)[0];
         keyToAdd.setAttribute(`data-key`,`${notesToMapArr[0]}`);
         keyToAdd.addEventListener('click',playNote);
         notesToMapArr.splice(0,1);
         orderedNotesArr.push(keyToAdd);
-      }
-    })
-  }
-}
+      };
+    });
+  };
+};
 
 function playNote (e){
   const note = document.querySelector(`audio[data-key=${e.target.getAttribute('data-key')}]`);
@@ -60,46 +57,11 @@ function playNote (e){
   fadeOut(note);
 };
 
-// keyToAdd.setAttribute(`[key-data=${notesToMapArr[0]}]`);
-
-//1. Put all white keys in an array. DONE
-//2. Put all black keys in an array DONE
-//3. Create an array that establishes the pattern.DONE
-//4. WHILE there are elements in the notes array, keep running the function below.
-//4. Map over the pattern array and if you hit a black key, REMOVE the first item from the black keys array and push it into the properly arranged key array.  If you hit a white key, do the same from the white key array.
-//5. For the map: the first thing that runs is: if there is no element in the notes array, return.
-
-// ******************
-
-// console.log('whiteKeysArr:',whiteKeysArr);
-//   console.log('blackKeysArr:',blackKeysArr);
-//   for(let i = 0; i < 5; i = i + 2) {
-//     whiteKeysArr[i / 2].setAttribute('data-key',`${arr[i]}`);
-//     blackKeysArr[i / 2].setAttribute('data-key',`${arr[i+1]}`);
-//     console.log(i);
-//   };
-  
-//   whiteKeysArr[4].setAttribute('data-key',`${arr[5]}`);
-//   console.log('second part started.  i is now: 5');
-  
-//   for(let i = 6; i < 12; i = i + 2) {
-//     whiteKeysArr[i / 2].setAttribute('data-key',`${arr[i]}`);
-//     blackKeysArr[i / 2].setAttribute('data-key',`${arr[i+1]}`);
-//     console.log('Third part started, i is now:',i);
-//   };
-//   console.log('whiteKeysArr:',whiteKeysArr);
-//   console.log('blackKeysArr:',blackKeysArr);
-
-// ****************
-
-
 //Pre-loads all notes in userOctaveNotes so that user interaction is not required for notes to be played.
 const loadAllNotes = function(){ 
   userOctaveNotes.forEach((note) => {
     let currentNote = document.querySelector(`audio[data-key=${note}`);
-    // console.log(currentNote);
     currentNote.load()});
-    
 };
 
 //starts fading out sound as soon as it's run by lowering volume every 50 milliseconds
@@ -170,12 +132,34 @@ const getRandomNote = () => {
 
 let firstRandomNote = '';
 
+const repeat = () => {
+  const firstAudio = document.querySelector(`audio[data-key=${firstRandomNote}`);
+  firstAudio.currentTime = 0;
+  firstAudio.volume = 1;
+  firstAudio.play();
+  setTimeout(() => fadeOut(firstAudio),1500);
+  setTimeout(() => {
+    const secondAudio = document.querySelector(`audio[data-key=${secondRandomNote}`);
+    secondAudio.currentTime = 0;
+    secondAudio.volume = 1;
+    secondAudio.play();
+    setTimeout(() => fadeOut(secondAudio),1500);
+  }, 3500);
+
+}
+
+const repeatButton = document.querySelector('button.repeat');
+repeatButton.addEventListener('click',repeat);
+
 
 const startTest = () => {
   //1. Remove existing event listeners and re-apply them to fire a different event on click.
   const allPianoKeys = document.querySelectorAll('.keyboard rect');
   allPianoKeys.forEach((el) => {
     el.removeEventListener('click',playNote);
+    el.classList.remove('firstNote');
+    el.classList.remove('correct');
+    el.classList.remove('incorrect');
   });
   allPianoKeys.forEach((el) => {
     el.addEventListener('click',playNoteForTest);
@@ -183,11 +167,16 @@ const startTest = () => {
   loadAllNotes(); 
   firstRandomNote = getRandomNote();
   const firstAudio = document.querySelector(`audio[data-key=${firstRandomNote}`);
+  firstAudio.volume = 1;
   firstAudio.play();
+  const firstKey = document.querySelector(`rect[data-key=${firstRandomNote}]`);
+  firstKey.classList.add('firstNote');
   //play the first randomNote
   setTimeout(() => fadeOut(firstAudio),1500);
   //play the second random note.
-  setTimeout(() => playSecondRandomNote(), 3500);
+  setTimeout(() => {
+    playSecondRandomNote();
+  }, 3500);
   //listen for user input 
   
 }
@@ -216,24 +205,26 @@ const playSecondRandomNote = function(){
   const randomIndex = Math.floor(Math.random() * secondRandomNoteArray.length);  
   secondRandomNote = secondRandomNoteArray[randomIndex]; 
   const secondKeyToPlay =  document.querySelector(`audio[data-key=${secondRandomNote}]`);
-  console.log('secondRandomNote:',secondRandomNote);  
+  console.log('secondRandomNote:',secondRandomNote); 
+  secondKeyToPlay.volume = 1; 
   secondKeyToPlay.play(); 
   setTimeout(() => fadeOut(secondKeyToPlay),1500);
 }
 
 const playNoteForTest = (e) => {
-  console.log('playNoteForTest was fired.');
   const userNote = e.target.getAttribute('data-key');
-  const userKey = document.querySelector(`audio[data-key=${userNote}]`);
-  userKey.currentTime = 0;
-  userKey.volume = 1;
-  userKey.play();
-  fadeOut(userKey);
-  console.log('userNote:',userNote);
+  const userKey = document.querySelector(`rect[data-key=${userNote}]`);
+  const userAudio = document.querySelector(`audio[data-key=${userNote}]`);
+  userAudio.currentTime = 0;
+  userAudio.volume = 1;
+  userAudio.play();
+  fadeOut(userAudio);
  if(compareNote(secondRandomNote,userNote)){
-   console.log('they are the same.');
+   userKey.classList.add('correct');
+   console.log('Correct');
  } else {
-  console.log('they are different.');
+  console.log('Incorrect');
+  userKey.classList.add('incorrect');
  };
 };
 

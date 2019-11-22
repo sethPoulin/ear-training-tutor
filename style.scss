@@ -8,7 +8,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 body {
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 40px auto 0;
 }
 
 section.settings, section.game {
@@ -23,16 +23,24 @@ rect {
   fill: white;
 }
 
-rect.black {
+.black {
   fill: black;
 }
 
-.fillBlue {
-  fill: blue;
+.keyboard rect.firstNote {
+  fill: rgb(82, 150, 193);
+}
+
+.correct, rect:hover.correct {
+  fill: rgb(35, 159, 60);
+}
+
+.incorrect, rect:hover.incorrect {
+  fill: rgb(135, 25, 25);
 }
 
 rect:hover {
-  fill: red;
+  fill: rgb(63, 63, 63);
 }
 
 .hidden {
