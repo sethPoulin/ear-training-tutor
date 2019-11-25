@@ -11,6 +11,30 @@ body {
   margin: 40px auto 0;
 }
 
+button.getStarted {
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.container {
+  border: 2px solid black;
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 0;
+  height: 350px;
+  overflow: hidden;
+  transition: opacity 0.3s, height 1.2s 0.3s;
+
+
+  opacity: 1;
+}
+
+.container.closed {
+  opacity: 0;
+  height:0;
+}
+
 section.settings, section.game {
   display: flex;
   flex-direction: column;
@@ -43,6 +67,10 @@ rect:hover {
   fill: rgb(63, 63, 63);
 }
 
+.disabled {
+  fill: rgb(159, 159, 159);
+}
+
 .hidden {
   display: none;
 }
@@ -53,4 +81,11 @@ rect:hover {
 
 .octaveMessage p {
   margin: 20px auto;
+  height: 30px;
+  transition: height 1s;
+}
+
+.octaveMessage p.tall {
+  height: 100px;
+
 }

@@ -22,8 +22,25 @@ const octaves = {
  octave7 : ['c7','c-7','d7','d-7','e7','f7','f-7','g7','g-7','a7','a-7','b7'],
 //  octave8 : ['c8']
 }
+ //removes grey colour from keys previously not in use
+const removeGreyColour = () => {
+  const allKeys = document.querySelectorAll('svg rect');
+  allKeys.forEach((key)=>{
+    key.classList.remove('disabled');
+  });
+};
+//adds grey colour to keys not in use and disables click event listener
+const disableUnusedKeys = () => {
+  const unusedKeys = document.querySelectorAll('rect[data-key=undefined]');
+  unusedKeys.forEach((key) => {
+    key.classList.add('disabled');
+    //removes any previously added event listeners;
+    key.removeEventListener('click',playUserInput);
+  });
+};
 
 const assignNotesToBrowserKeys = function() {
+  removeGreyColour();
   const whiteKeysArr = Array.from(document.querySelectorAll('svg rect:not(.black)'));
   const blackKeysArr = Array.from(document.querySelectorAll('svg rect.black'));
   const keyPattern = [0,1,0,1,0,0,1,0,1,0,1,0];
@@ -34,27 +51,30 @@ const assignNotesToBrowserKeys = function() {
       if(key===0){
         const keyToAdd = (whiteKeysArr.splice(0,1))[0];
         keyToAdd.setAttribute(`data-key`,`${notesToMapArr[0]}`);
-        keyToAdd.addEventListener('click',playNote);
+        keyToAdd.addEventListener('click',playUserInput);
         notesToMapArr.splice(0,1);
         orderedNotesArr.push(keyToAdd);  
       };
       if(key===1){
         const keyToAdd = blackKeysArr.splice(0,1)[0];
         keyToAdd.setAttribute(`data-key`,`${notesToMapArr[0]}`);
-        keyToAdd.addEventListener('click',playNote);
+        keyToAdd.addEventListener('click',playUserInput);
         notesToMapArr.splice(0,1);
         orderedNotesArr.push(keyToAdd);
       };
     });
   };
+  disableUnusedKeys();
+  return orderedNotesArr;
 };
 
-function playNote (e){
+
+
+function playUserInput (e){
   const note = document.querySelector(`audio[data-key=${e.target.getAttribute('data-key')}]`);
-  note.currentTime = 0;
-  note.volume = 1;
-  note.play();
-  fadeOut(note);
+  console.log(e.target);
+  console.log(note);
+  playNote(note);
 };
 
 //Pre-loads all notes in userOctaveNotes so that user interaction is not required for notes to be played.
@@ -84,19 +104,20 @@ const checkOctavesAreAdjacent = function(){
   if(checkedOctaves.length > 4){
     //print an error message and return
   };
-  const allCheckedOctaves = allOctaves.filter((el)=>{
-    return el.checked;
-  });
-  const allCheckedOctavesIndexes = allCheckedOctaves.map((el)=>{
-    return allOctaves.indexOf(el);
-  });
+  
+  const checkedOctavesIndexes = allOctaves
+    //filter out the checked octaves
+    .filter((el)=> el.checked)
+    //and map 
+    .map((el)=>allOctaves.indexOf(el));
+ 
   //this is just an array of consecutive numbers that has the same starting value and is the same length as allCHeckedOctavesIndexes
   const consecutiveArray = [];
-  for(let i=0;i<allCheckedOctavesIndexes.length;i++){
-    consecutiveArray.push(allCheckedOctavesIndexes[0]+i);
+  for(let i=0;i<checkedOctavesIndexes.length;i++){
+    consecutiveArray.push(checkedOctavesIndexes[0]+i);
   };
   //check if the consecutive array and the checked indexes array are equal
-  if(JSON.stringify(consecutiveArray) === JSON.stringify(allCheckedOctavesIndexes)){
+  if(JSON.stringify(consecutiveArray) === JSON.stringify(checkedOctavesIndexes)){
     return true;
   } else {
     return false;
@@ -115,17 +136,16 @@ const setUserOctaves = function(){
   console.log(userOctaveNotes);
   console.log(checkOctavesAreAdjacent());
   assignNotesToBrowserKeys();
-  return userOctaveNotes;
 }
 
 //update the userOctaveNotes array every time there is a change to the octaves field
 const octaveSelector = document.querySelector('fieldset');
 octaveSelector.addEventListener('change',setUserOctaves);
 
-//pick a random note from the userOctaveNotes array
-const getRandomNote = () => {
-  const randomNoteIndex = Math.floor(Math.random() * userOctaveNotes.length);
-  randomNote = userOctaveNotes[randomNoteIndex];
+//pick a random note from a specified array
+const getRandomNote = (arr) => {
+  const randomNoteIndex = Math.floor(Math.random() * arr.length);
+  const randomNote = arr[randomNoteIndex];
   console.log(randomNote);
   return randomNote;
 }
@@ -134,95 +154,113 @@ let firstRandomNote = '';
 
 const repeat = () => {
   const firstAudio = document.querySelector(`audio[data-key=${firstRandomNote}`);
-  firstAudio.currentTime = 0;
-  firstAudio.volume = 1;
-  firstAudio.play();
-  setTimeout(() => fadeOut(firstAudio),1500);
+  playNote(firstAudio);
   setTimeout(() => {
     const secondAudio = document.querySelector(`audio[data-key=${secondRandomNote}`);
-    secondAudio.currentTime = 0;
-    secondAudio.volume = 1;
-    secondAudio.play();
-    setTimeout(() => fadeOut(secondAudio),1500);
-  }, 3500);
+    playNote(secondAudio);
+  }, 2500);
 
 }
 
 const repeatButton = document.querySelector('button.repeat');
 repeatButton.addEventListener('click',repeat);
 
-
-const startTest = () => {
-  //1. Remove existing event listeners and re-apply them to fire a different event on click.
+const removeEventListenersAndClasses = () => {
   const allPianoKeys = document.querySelectorAll('.keyboard rect');
   allPianoKeys.forEach((el) => {
-    el.removeEventListener('click',playNote);
+    el.removeEventListener('click',playUserInput);
     el.classList.remove('firstNote');
     el.classList.remove('correct');
     el.classList.remove('incorrect');
   });
-  allPianoKeys.forEach((el) => {
-    el.addEventListener('click',playNoteForTest);
-  });
-  loadAllNotes(); 
-  firstRandomNote = getRandomNote();
-  const firstAudio = document.querySelector(`audio[data-key=${firstRandomNote}`);
-  firstAudio.volume = 1;
-  firstAudio.play();
-  const firstKey = document.querySelector(`rect[data-key=${firstRandomNote}]`);
-  firstKey.classList.add('firstNote');
-  //play the first randomNote
-  setTimeout(() => fadeOut(firstAudio),1500);
-  //play the second random note.
-  setTimeout(() => {
-    playSecondRandomNote();
-  }, 3500);
-  //listen for user input 
-  
 }
 
-//Once the first random note is played, we create an array of possible second notes based on the user interval.  If the interval is 8 we add eight notes ahead of the first note and eight notes behind the first note, all selected from the userOctaveNotes.  If it's not possible to select eight notes in either direction, we add as many as we can until the end of the array is reached.
+const addClickEventListeners = () => {
+  const allPianoKeys = document.querySelectorAll('.keyboard rect');
+  allPianoKeys.forEach((el) => {
+    el.addEventListener('click',testUserNote);
+  });
+}
 
+playFirstRandomNote = () => {
+  firstRandomNote = getRandomNote(userOctaveNotes);
+  const firstKey = document.querySelector(`rect[data-key=${firstRandomNote}]`);
+  firstKey.classList.add('firstNote');
+  const firstAudio = document.querySelector(`audio[data-key=${firstRandomNote}`);
+  playNote(firstAudio);
+}
+
+const startTest = () => {
+  //Remove existing event listeners and classes
+  removeEventListenersAndClasses()
+  //applies event listeners to the keyboard that trigger the testUserNote function.
+  addClickEventListeners();
+  //pre-loads notes in use so they can be triggered without user input.
+  loadAllNotes(); 
+  playFirstRandomNote();
+  //plays second random note after 3.5 seconds.
+  setTimeout(() => {
+    playSecondRandomNote();
+  }, 2500); 
+}
+
+//Once the first random note is played, we create an array of possible second notes based on the user interval.  For interval x we add x notes ahead of the first note and x notes behind the first note, all selected from the userOctaveNotes.  If it's not possible to select x notes in one or both directions, we add as many as we can until the end of the array is reached.
 const secondRandomNoteArray = [];
   
 const getSecondRandomNoteArray = function(){
-  //sets firstNoteIndex to the index in the userOctaveNotes array of the first random note played
+  //empties the array 
   secondRandomNoteArray.length = 0;
+  //gets the index in [userOctaveNotes] of the first random note 
   const firstNoteIndex = userOctaveNotes.indexOf(firstRandomNote);
   //sets currentInterval to whatever is selected in the interval selector.
   const currentInterval = Number(document.getElementById("maxInterval").value);
-  const firstBatchofNotes = userOctaveNotes.slice(firstNoteIndex, firstNoteIndex+currentInterval+1); 
+  //store the array of possible higher notes in a variable...
+  const firstBatchofNotes = userOctaveNotes.slice(firstNoteIndex, firstNoteIndex+currentInterval+1);
+  //and push all the notes into [secondRandomNoteArray]. 
   secondRandomNoteArray.push(...firstBatchofNotes);
+  //get the starting index for the second batch of notes.  If the index would go below zero, just make it zero.
   const indexStart = Math.max(0,firstNoteIndex - currentInterval);
+  //use the index to extract the lower notes and place them at the start of [secondRandomNoteArray].
   const secondBatchofNotes = (userOctaveNotes.slice(indexStart, firstNoteIndex)) 
   secondRandomNoteArray.unshift(...secondBatchofNotes);
-
+  return secondRandomNoteArray;
 }
+
 let secondRandomNote = '';  
 
-const playSecondRandomNote = function(){ 
-  getSecondRandomNoteArray();
-  const randomIndex = Math.floor(Math.random() * secondRandomNoteArray.length);  
-  secondRandomNote = secondRandomNoteArray[randomIndex]; 
-  const secondKeyToPlay =  document.querySelector(`audio[data-key=${secondRandomNote}]`);
-  console.log('secondRandomNote:',secondRandomNote); 
-  secondKeyToPlay.volume = 1; 
-  secondKeyToPlay.play(); 
-  setTimeout(() => fadeOut(secondKeyToPlay),1500);
+const playNote = (note) => {
+  note.volume = 1;
+  note.currentTime = 0;
+  note.play(); 
+  setTimeout(() => fadeOut(note),1200);
 }
 
-const playNoteForTest = (e) => {
+const playSecondRandomNote = () => { 
+  //pick a note from the second random note array 
+  console.log(getSecondRandomNoteArray()); 
+  secondRandomNote = getRandomNote(getSecondRandomNoteArray());
+  console.log(secondRandomNote);
+  //selects a different note if the first note and second notes are the same
+  while(secondRandomNote === firstRandomNote){
+    secondRandomNote = getRandomNote(getSecondRandomNoteArray());
+  };
+  const secondKeyToPlay =  document.querySelector(`audio[data-key=${secondRandomNote}]`);
+  console.log('secondRandomNote:',secondRandomNote); 
+  playNote(secondKeyToPlay); 
+}
+
+//this function only runs once test has started and user clicks a key
+const testUserNote = (e) => {
   const userNote = e.target.getAttribute('data-key');
   const userKey = document.querySelector(`rect[data-key=${userNote}]`);
   const userAudio = document.querySelector(`audio[data-key=${userNote}]`);
-  userAudio.currentTime = 0;
-  userAudio.volume = 1;
-  userAudio.play();
-  fadeOut(userAudio);
+  playNote(userAudio);
  if(compareNote(secondRandomNote,userNote)){
+   //show correct message
    userKey.classList.add('correct');
    console.log('Correct');
  } else {
+  //show incorrect message
   console.log('Incorrect');
   userKey.classList.add('incorrect');
  };
@@ -236,7 +274,3 @@ setUserOctaves();
 
 const startButton = document.querySelector('button.start');
 startButton.addEventListener('click',startTest);
-
-//listen for user clicks on keyboard
-
-//if clicked button id matches note id, message 'correct', otherwise message 'incorrect.'
