@@ -18,21 +18,22 @@ button.getStarted {
 }
 
 .octaveMessage {
+
   position: relative;
 
-  p {
-    opacity: 0;
-    position: absolute;
-    bottom: -20px;
-    z-index: 1;
-    transition: opacity 0.3s;
+  // p {
+  //   opacity: 0;
+  //   position: absolute;
+  //   bottom: -20px;
+  //   z-index: 1;
+  //   transition: opacity 0.3s;
 
-    &.visible {
-      opacity: 1;
-      z-index: 10;
-    }
+  //   &.visible {
+  //     opacity: 1;
+  //     z-index: 10;
+  //   }
 
-  }
+  // }
 }
 
 
@@ -49,7 +50,7 @@ button.getStarted {
 }
 
 fieldset[name="octaves"] {
-  margin-bottom: 50px;
+  margin-bottom: 0;
 }
 
 .container.closed {

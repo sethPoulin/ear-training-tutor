@@ -128,8 +128,10 @@ const disableButtons = () => {
   document.querySelector('button.repeat').setAttribute('disabled','true');
 }
 
-const displayMessage = (node) => {
-  document.querySelector(node).classList.add('visible');
+const displayMessage = (string) => {
+  const test = document.querySelector('.octaveMessage p');
+  console.log('string:',string);
+  test.innerHTML = string;
 };
 
 const hideMessage = (node) => {
@@ -143,21 +145,19 @@ const setUserOctaves = function(){
   //empties the userOctaveNotes array
   userOctaveNotes.length = 0;
   //removes any existing messages and enables buttons
-  hideMessage('.octaveMessage p');
-  hideMessage('.octaveMessage p:last-child');
-  hideMessage('.octaveMessage p.maximum');
+  displayMessage('');
   document.querySelector('button.start').removeAttribute('disabled','true');
   document.querySelector('button.repeat').removeAttribute('disabled','true');
   
   const checked = document.querySelectorAll(`input[type="checkbox"]:checked`);
   //if no octaves are selected, disable buttons, display error message and return
   if(checked.length === 0){
-    displayMessage('.octaveMessage p');
+    displayMessage('Please select at least one octave');
     disableButtons();
     return;
   }
   if(checked.length > 4){
-    displayMessage('.octaveMessage p.maximum');
+    displayMessage('Please select a maximum of 4 octaves.');
     disableButtons();
   }
   checked.forEach(checkbox => {
@@ -165,7 +165,7 @@ const setUserOctaves = function(){
     userOctaveNotes.push(...octaves[checkbox.id]);
   })
   if(!checkOctavesAreAdjacent()){
-    displayMessage('.octaveMessage p:last-child');
+    displayMessage('Octaves must be adjacent');
     disableButtons();
   }
   console.log(userOctaveNotes);
