@@ -236,6 +236,33 @@ button.getStarted {
   position: relative;
 }
 
+@-webkit-keyframes fadeUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeUp;
+          animation-name: fadeUp;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
 .container {
   border: 2px solid black;
   width: 80%;
@@ -312,13 +339,10 @@ rect:hover {
 }
 
 .octaveMessage p {
+  opacity: 0;
   margin: 20px auto;
   height: 30px;
   -webkit-transition: height 1s;
   transition: height 1s;
-}
-
-.octaveMessage p.tall {
-  height: 100px;
 }
 /*# sourceMappingURL=style.css.map */

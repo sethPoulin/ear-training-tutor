@@ -36,6 +36,17 @@ button.getStarted {
   // }
 }
 
+@keyframes fadeUp {
+  0%{opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fadeIn {
+  animation-name: fadeUp;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  // animation-delay: 1s;
+}
 
 
 .container {
@@ -103,12 +114,13 @@ rect:hover {
 }
 
 .octaveMessage p {
+  opacity: 0;
   margin: 20px auto;
   height: 30px;
   transition: height 1s;
 }
 
-.octaveMessage p.tall {
-  height: 100px;
+// .octaveMessage p.tall {
+//   height: 100px;
 
-}
+// }

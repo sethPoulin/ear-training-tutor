@@ -85,7 +85,7 @@ const loadAllNotes = function(){
 };
 
 //starts fading out sound as soon as it's run by lowering volume every 50 milliseconds
-const fadeOut = function(sample){
+const fadeOutAudio = function(sample){
   let vol = sample.volume;
   setInterval(function(){ 
     
@@ -100,10 +100,10 @@ const fadeOut = function(sample){
 const checkOctavesAreAdjacent = function(){
   const allOctaves = Array.from(document.querySelectorAll('input[type="checkbox"]'));
   const checkedOctaves = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'));
-  if(checkedOctaves.length === 0 || checkedOctaves.length === 1) return;
-  if(checkedOctaves.length > 4){
-    //print an error message and return
-  };
+  // if(checkedOctaves.length === 0 || checkedOctaves.length === 1) return;
+  // if(checkedOctaves.length > 4){
+  //   //print an error message and return
+  // };
   const checkedOctavesIndexes = allOctaves
     //filter out the checked octaves
     .filter((el)=> el.checked)
@@ -134,8 +134,10 @@ const displayMessage = (string) => {
   test.innerHTML = string;
 };
 
-const hideMessage = (node) => {
-  document.querySelector(node).classList.remove('visible');
+const fadeInMessage = (node) => {
+  setTimeout(()=>{
+  document.querySelector(node).classList.add('fadeIn');
+  },100); 
 }
 
 
@@ -145,6 +147,7 @@ const setUserOctaves = function(){
   //empties the userOctaveNotes array
   userOctaveNotes.length = 0;
   //removes any existing messages and enables buttons
+  document.querySelector('.octaveMessage p').classList.remove('fadeIn');
   displayMessage('');
   document.querySelector('button.start').removeAttribute('disabled','true');
   document.querySelector('button.repeat').removeAttribute('disabled','true');
@@ -153,11 +156,13 @@ const setUserOctaves = function(){
   //if no octaves are selected, disable buttons, display error message and return
   if(checked.length === 0){
     displayMessage('Please select at least one octave');
+    fadeInMessage('.octaveMessage p');
     disableButtons();
     return;
   }
   if(checked.length > 4){
     displayMessage('Please select a maximum of 4 octaves.');
+    fadeInMessage('.octaveMessage p');
     disableButtons();
   }
   checked.forEach(checkbox => {
@@ -166,6 +171,7 @@ const setUserOctaves = function(){
   })
   if(!checkOctavesAreAdjacent()){
     displayMessage('Octaves must be adjacent');
+    fadeInMessage('.octaveMessage p');
     disableButtons();
   }
   console.log(userOctaveNotes);
@@ -267,7 +273,7 @@ const playNote = (note) => {
   note.volume = 1;
   note.currentTime = 0;
   note.play(); 
-  setTimeout(() => fadeOut(note),1200);
+  setTimeout(() => fadeOutAudio(note),1200);
 }
 
 const playSecondRandomNote = () => { 
