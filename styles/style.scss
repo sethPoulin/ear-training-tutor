@@ -64,6 +64,8 @@ h2 {
 h3 {
   font-size: 2.2rem;
   margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 
 header {
@@ -88,25 +90,6 @@ button.getStarted {
   }
 }
 
-.octaveMessage {
-
-  // position: relative;
-
-  // p {
-  //   opacity: 0;
-  //   position: absolute;
-  //   bottom: -20px;
-  //   z-index: 1;
-  //   transition: opacity 0.3s;
-
-  //   &.visible {
-  //     opacity: 1;
-  //     z-index: 10;
-  //   }
-
-  // }
-}
-
 @keyframes fadeUp {
   0%{opacity: 0;}
   100% {opacity: 1;}
@@ -125,10 +108,14 @@ button.getStarted {
   width: 80%;
   margin: 0 auto;
   margin-top: 80px;
-  padding: 30px 0;
-  height: 450px;
-  transition: opacity 0.3s, height 1.2s 0.3s;
+  padding: 50px 0 30px;
+  height: 550px;
+  transition: height 0.5s;
   opacity: 1;
+
+  &.collapsed {
+    height: 450px;
+  }
   // position: relative;
 }
 
@@ -142,7 +129,7 @@ button.getStarted {
 }
 
 .close svg {
-  fill: $red;
+  fill: $grey;
 }
 
 fieldset[name="octaves"] {
@@ -173,22 +160,39 @@ section.game {
   margin-top: 15px;
 }
 
-label h3 {
-  display: inline;
-  margin-right: 20px;
+.maxInterval {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+
+
+  h3 {
+    margin-bottom: 0;
+  }
 }
+
+// label h3 {
+//   display: inline-block;
+//   margin-right: 20px;
+  
+//   text-align: center;
+// }
 
 .octaveMessage p {
   opacity: 0;
   margin: 20px auto;
   height: 50px;
-  transition: height .8s, margin .8s, border 1s;
+  transition: height .5s, margin .5s;
   font-size: 2.2rem;
   border: 3px solid $red;
   padding: 10px;
+  text-align: center;
 
   &.collapsed {
-    // height: 0px;
+    height: 35px;
     padding-top: 0;
     padding-bottom: 0;
     margin: 0px;

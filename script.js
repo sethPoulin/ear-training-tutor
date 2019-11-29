@@ -160,12 +160,15 @@ const fadeInMessage = (node) => {
   },100); 
 };
 
-const collapseMessage = (node) => {
-  document.querySelector(node).classList.add('collapsed');
+const collapseMessageBox = () => {
+  document.querySelector('.octaveMessage p').classList.add('collapsed');
+  document.querySelector('.settingsContainer').classList.add('collapsed');
+
 };
 
-const uncollapseMessage = (node) => {
-  document.querySelector(node).classList.remove('collapsed');
+const uncollapseMessageBox = () => {
+  document.querySelector('.octaveMessage p').classList.remove('collapsed');
+  document.querySelector('.settingsContainer').classList.remove('collapsed');
 };
 
 
@@ -175,7 +178,7 @@ const setUserOctaves = function(){
   //empties the userOctaveNotes array
   userOctaveNotes.length = 0;
   //removes any existing messages and enables buttons
-  collapseMessage('.octaveMessage p');
+  collapseMessageBox('.octaveMessage p');
   document.querySelector('.octaveMessage p').classList.remove('fadeIn');
   displayMessage('');
   document.querySelector('button.start').removeAttribute('disabled','true');
@@ -184,14 +187,14 @@ const setUserOctaves = function(){
   const checked = document.querySelectorAll(`input[type="checkbox"]:checked`);
   //if no octaves are selected, disable buttons, display error message and return
   if(checked.length === 0){
-    uncollapseMessage('.octaveMessage p');
+    uncollapseMessageBox();
     displayMessage('Please select at least one octave');
     fadeInMessage('.octaveMessage p');
     disableButtons();
     return;
   }
   if(checked.length > 4){
-    uncollapseMessage('.octaveMessage p');
+    uncollapseMessageBox();
     displayMessage('Please select a maximum of 4 octaves.');
     fadeInMessage('.octaveMessage p');
     disableButtons();
@@ -201,7 +204,7 @@ const setUserOctaves = function(){
     userOctaveNotes.push(...octaves[checkbox.id]);
   })
   if(!checkOctavesAreAdjacent()){
-    uncollapseMessage('.octaveMessage p');
+    uncollapseMessageBox();
     displayMessage('Octaves must be adjacent');
     fadeInMessage('.octaveMessage p');
     disableButtons();

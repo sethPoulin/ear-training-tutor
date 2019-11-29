@@ -11,11 +11,11 @@
 <body>
   <header>
     <h1>Musical Ear-training tutor</h1>
-    <h2>Learn to detect musical intervals (the tonal distance between notes) by identifying the notes played.</h2>
+    <h2>Learn to detect musical intervals (the tonal distance between notes) by identifying the notes played!</h2>
     <h2>One random note will be played and identified.  <span class="block">You must identify the <span class="allCaps">next</span> note played by clicking on the piano.</span></h2>
     <button class="getStarted">Get started</button>
   </header>
-  <div class="settingsContainer hidden">
+  <div class="settingsContainer hidden collapsed">
       <div class="close" aria-label="Click to exit">
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 22.88 22.88" style="enable-background:new 0 0 22.88 22.88;" xml:space="preserve">
@@ -31,7 +31,7 @@
       <form action="">
         
         <fieldset name="octaves">
-          <h3 class="bold">Select octaves to use. Octaves must be adjacent.</h3>
+          <h3>Select octaves to use. Octaves must be adjacent.</h3>
         
           <label for="octave1">Octave 1</label>
           <input type="checkbox" id="octave1" name="octave" value="octave1">
@@ -63,24 +63,26 @@
           </div>
   
         
-        <label for="maxInterval"><h3>Select the max interval length (in semitones):</h3></label>
-        <select name="maxInterval" id="maxInterval">
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8" selected="true">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-        </select>
+        <div class="maxInterval">
+          <label for="maxInterval"><h3>Select the max interval length (in semitones):</h3></label>
+          <select name="maxInterval" id="maxInterval">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8" selected="true">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+          </select>
+        </div>
       </form>
     </section>
     <section class="game">
