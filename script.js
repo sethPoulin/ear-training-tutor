@@ -42,7 +42,6 @@ const disableUnusedKeys = () => {
 
 //hides the landing section and displays the settings section
 const showSettings = () => {
-  console.log('showSettings was fired');
   document.querySelector('header').classList.add('hidden');
   document.querySelector('.settingsContainer').classList.remove('hidden');
 }
@@ -78,6 +77,15 @@ const assignNotesToBrowserKeys = function() {
   disableUnusedKeys();
   return orderedNotesArr;
 };
+
+const restart = () => {
+  document.querySelector('header').classList.remove('hidden');
+  document.querySelector('.settingsContainer').classList.add('hidden');
+}
+
+document.querySelector('.close').addEventListener('click',restart);
+
+
 
 
 
