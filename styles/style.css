@@ -465,12 +465,14 @@ rect:hover {
   transition: fill .3s;
 }
 
-button.disabledButton {
+button.disabled {
   color: #8E8D8A;
+  border: 3px solid #8E8D8A;
 }
 
-button.disabledButton:hover {
-  background-color: transparent;
+button.disabled:hover {
+  background: #F0F0F0;
+  color: #8E8D8A;
 }
 
 .hidden {

@@ -174,13 +174,6 @@ section.game {
   }
 }
 
-// label h3 {
-//   display: inline-block;
-//   margin-right: 20px;
-  
-//   text-align: center;
-// }
-
 .octaveMessage p {
   opacity: 0;
   margin: 20px auto;
@@ -198,7 +191,6 @@ section.game {
     margin: 0px;
     border: none;
   }
-  
 }
 
 rect {
@@ -231,11 +223,13 @@ rect:hover {
   transition: fill .3s;
 }
 
-button.disabledButton {
+button.disabled {
   color: $grey;
+  border: 3px solid $grey;
 
   &:hover {
-    background-color: transparent;
+    background: $offwhite;
+    color: $grey;
   }
 }
 

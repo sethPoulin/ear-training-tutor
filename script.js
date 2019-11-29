@@ -85,10 +85,6 @@ const restart = () => {
 
 document.querySelector('.close').addEventListener('click',restart);
 
-
-
-
-
 function playUserInput (e){
   const note = document.querySelector(`audio[data-key=${e.target.getAttribute('data-key')}]`);
   console.log(e.target);
@@ -115,26 +111,22 @@ const fadeOutAudio = function(sample){
   },50);
 };
 
-
+//checks whether selected octaves are adjacent to one another
 const checkOctavesAreAdjacent = function(){
   const allOctaves = Array.from(document.querySelectorAll('input[type="checkbox"]'));
   const checkedOctaves = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'));
-  // if(checkedOctaves.length === 0 || checkedOctaves.length === 1) return;
-  // if(checkedOctaves.length > 4){
-  //   //print an error message and return
-  // };
   const checkedOctavesIndexes = allOctaves
     //filter out the checked octaves
     .filter((el)=> el.checked)
-    //and map 
+    //and return an array of the index number of each element (from allOctaves)
     .map((el)=>allOctaves.indexOf(el));
  
-  //this is just an array of consecutive numbers that has the same starting value and is the same length as allCHeckedOctavesIndexes
+  //generates an array of consecutive numbers with the same starting value and the same length as checkedOctavesIndexes
   const consecutiveArray = [];
   for(let i=0;i<checkedOctavesIndexes.length;i++){
     consecutiveArray.push(checkedOctavesIndexes[0]+i);
   };
-  //check if the consecutive array and the checked indexes array are equal
+  //check if the consecutive array and the checkedOctavesIndexes array are equal
   if(JSON.stringify(consecutiveArray) === JSON.stringify(checkedOctavesIndexes)){
     return true;
   } else {
@@ -144,7 +136,9 @@ const checkOctavesAreAdjacent = function(){
 
 const disableButtons = () => {
   document.querySelector('button.start').setAttribute('disabled','true');
+  document.querySelector('button.start').classList.add('disabled');
   document.querySelector('button.repeat').setAttribute('disabled','true');
+  document.querySelector('button.repeat').classList.add('disabled');
 }
 
 const displayMessage = (string) => {
@@ -183,6 +177,8 @@ const setUserOctaves = function(){
   displayMessage('');
   document.querySelector('button.start').removeAttribute('disabled','true');
   document.querySelector('button.repeat').removeAttribute('disabled','true');
+  document.querySelector('button.start').classList.remove('disabled');
+  document.querySelector('button.repeat').classList.remove('disabled');
   
   const checked = document.querySelectorAll(`input[type="checkbox"]:checked`);
   //if no octaves are selected, disable buttons, display error message and return
