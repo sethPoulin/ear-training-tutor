@@ -267,8 +267,6 @@ const startTest = () => {
   removeEventListenersAndClasses()
   //applies event listeners to the keyboard that trigger the testUserNote function.
   addClickEventListeners();
-  //pre-loads notes in use so they can be triggered without user input.
-  loadAllNotes(); 
   playFirstRandomNote();
   //plays second random note after 3.5 seconds.
   setTimeout(() => {
@@ -343,6 +341,8 @@ const compareNote = (note1, note2) => {
 };
 
 setUserOctaves();
+//pre-loads notes in use so they can be triggered without user input.
+loadAllNotes(); 
 
 const startButton = document.querySelector('button.start');
 startButton.addEventListener('click',startTest);
