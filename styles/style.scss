@@ -1,3 +1,6 @@
+@import 'partials/_variables.scss';
+
+
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration,input[type=search]::-webkit-search-results-button,input[type=search]::-webkit-search-results-decoration{-webkit-appearance:none;-moz-appearance:none}input[type=search]{-webkit-appearance:none;-moz-appearance:none;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}textarea{overflow:auto;vertical-align:top;resize:vertical}audio,canvas,video{display:inline-block;max-width:100%}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}a:focus{outline:thin dotted}a:active,a:hover{outline:0}img{border:0;-ms-interpolation-mode:bicubic}figure{margin:0}form{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0;white-space:normal}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline}button,input{line-height:normal}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}button,html,input,select,textarea{color:#222}::-moz-selection{background:#b3d4fc;text-shadow:none}::selection{background:#b3d4fc;text-shadow:none}img{vertical-align:middle}fieldset{border:0;margin:0;padding:0}textarea{resize:vertical}.chromeframe{margin:.2em 0;background:#ccc;color:#000;padding:.2em 0}
 
 .clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
@@ -6,9 +9,34 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 .visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   max-width: 1400px;
   margin: 40px auto 0;
+  background-color: #EAE7DC;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.8rem;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 40px;
+  color: $red;
+}
+
+h2, p, button, select, input, label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
 }
 
 button.getStarted {
@@ -43,18 +71,18 @@ button.getStarted {
 
 .fadeIn {
   animation-name: fadeUp;
-  animation-duration: 1s;
+  animation-duration: .5s;
   animation-fill-mode: forwards;
   // animation-delay: 1s;
 }
 
 
 .container {
-  border: 2px solid black;
+  border: 4px solid #8E8D8A;
   width: 80%;
   margin: 0 auto;
   padding: 30px 0;
-  height: 350px;
+  height: 450px;
   overflow: hidden;
   transition: opacity 0.3s, height 1.2s 0.3s;
   opacity: 1;
@@ -62,6 +90,10 @@ button.getStarted {
 
 fieldset[name="octaves"] {
   margin-bottom: 0;
+
+  p {
+    padding-bottom: 15px;
+  }
 }
 
 .container.closed {
@@ -74,6 +106,38 @@ section.settings, section.game {
   flex-direction: column;
   align-items: center;
   transition: all 0.7s;
+}
+
+input[type=checkbox] {
+  margin-right: 5px;
+}
+
+section.game {
+  margin-top: 15px;
+}
+
+label h2 {
+  display: inline;
+  margin-right: 20px;
+}
+
+.octaveMessage p {
+  opacity: 0;
+  margin: 20px auto;
+  height: 50px;
+  transition: height .8s, margin .8s, border 1s;
+  font-size: 2.2rem;
+  border: 3px solid $red;
+  padding: 10px;
+
+  &.collapsed {
+    // height: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0px;
+    border: none;
+  }
+  
 }
 
 rect {
@@ -105,6 +169,14 @@ rect:hover {
   fill: rgb(159, 159, 159);
 }
 
+button.disabledButton {
+  color: $grey;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
 .hidden {
   display: none;
 }
@@ -113,12 +185,41 @@ rect:hover {
   display: flex;
 }
 
-.octaveMessage p {
-  opacity: 0;
-  margin: 20px auto;
-  height: 30px;
-  transition: height 1s;
+.gameButtons {
+  display: flex;
+  margin-top: 30px;
+  width: 643px;
+  justify-content: space-between;
 }
+
+.gameButtons button {
+  width: 100%;
+  padding: 10px 0;
+  border: 4px solid $red;
+  // background-color: $red;
+  color: black;
+
+  &:hover {
+    background-color: $red;
+    color: white;
+  }
+  
+}
+
+.leftSide, .rightSide {
+  display: flex;
+  width: 100%;
+}
+
+.rightSide {
+  justify-content: flex-end;
+  padding-left: 10px;
+}
+
+.leftSide {
+  padding-right: 10px;
+}
+
 
 // .octaveMessage p.tall {
 //   height: 100px;

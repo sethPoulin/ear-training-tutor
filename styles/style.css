@@ -221,9 +221,34 @@ textarea {
   overflow: hidden;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   max-width: 1400px;
   margin: 40px auto 0;
+  background-color: #EAE7DC;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.8rem;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 40px;
+  color: #EA5A4F;
+}
+
+h2, p, button, select, input, label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
 }
 
 button.getStarted {
@@ -257,18 +282,18 @@ button.getStarted {
 .fadeIn {
   -webkit-animation-name: fadeUp;
           animation-name: fadeUp;
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
 
 .container {
-  border: 2px solid black;
+  border: 4px solid #8E8D8A;
   width: 80%;
   margin: 0 auto;
   padding: 30px 0;
-  height: 350px;
+  height: 450px;
   overflow: hidden;
   -webkit-transition: opacity 0.3s, height 1.2s 0.3s;
   transition: opacity 0.3s, height 1.2s 0.3s;
@@ -277,6 +302,10 @@ button.getStarted {
 
 fieldset[name="octaves"] {
   margin-bottom: 0;
+}
+
+fieldset[name="octaves"] p {
+  padding-bottom: 15px;
 }
 
 .container.closed {
@@ -297,6 +326,37 @@ section.settings, section.game {
           align-items: center;
   -webkit-transition: all 0.7s;
   transition: all 0.7s;
+}
+
+input[type=checkbox] {
+  margin-right: 5px;
+}
+
+section.game {
+  margin-top: 15px;
+}
+
+label h2 {
+  display: inline;
+  margin-right: 20px;
+}
+
+.octaveMessage p {
+  opacity: 0;
+  margin: 20px auto;
+  height: 50px;
+  -webkit-transition: height .8s, margin .8s, border 1s;
+  transition: height .8s, margin .8s, border 1s;
+  font-size: 2.2rem;
+  border: 3px solid #EA5A4F;
+  padding: 10px;
+}
+
+.octaveMessage p.collapsed {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0px;
+  border: none;
 }
 
 rect {
@@ -328,6 +388,14 @@ rect:hover {
   fill: #9f9f9f;
 }
 
+button.disabledButton {
+  color: #8E8D8A;
+}
+
+button.disabledButton:hover {
+  background-color: transparent;
+}
+
 .hidden {
   display: none;
 }
@@ -338,11 +406,44 @@ rect:hover {
   display: flex;
 }
 
-.octaveMessage p {
-  opacity: 0;
-  margin: 20px auto;
-  height: 30px;
-  -webkit-transition: height 1s;
-  transition: height 1s;
+.gameButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 30px;
+  width: 643px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.gameButtons button {
+  width: 100%;
+  padding: 10px 0;
+  border: 4px solid #EA5A4F;
+  color: black;
+}
+
+.gameButtons button:hover {
+  background-color: #EA5A4F;
+  color: white;
+}
+
+.leftSide, .rightSide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.rightSide {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-left: 10px;
+}
+
+.leftSide {
+  padding-right: 10px;
 }
 /*# sourceMappingURL=style.css.map */
