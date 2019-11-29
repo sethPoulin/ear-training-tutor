@@ -9,15 +9,20 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <h1>Musical Ear-training tutor</h1>
-  <div class="container">
+  <header>
+    <h1>Musical Ear-training tutor</h1>
+    <h2>Learn to detect musical intervals (the tonal distance between notes) by identifying the notes played.</h2>
+    <h2>One random note will be played and identified.  <span class="block">You must identify the <span class="allCaps">next</span> note played by clicking on the piano.</span></h2>
+    <button class="getStarted">Get started</button>
+  </header>
+  <div class="settingsContainer hidden">
     <section class="settings">
       <!-- <button class="getIntervalLength">Get interval length</button> -->
       
       <form action="">
         
         <fieldset name="octaves">
-          <h2>Select octaves to use.  Octaves must be adjacent.</h2>
+          <h3 class="bold">Select octaves to use.  Octaves must be adjacent.</h3>
         
           <label for="octave1">Octave 1</label>
           <input type="checkbox" id="octave1" name="octave" value="octave1">
@@ -49,7 +54,7 @@
           </div>
   
         
-        <label for="maxInterval"><h2>Select the max interval length (in semitones):</h2></label>
+        <label for="maxInterval"><h3>Select the max interval length (in semitones):</h3></label>
         <select name="maxInterval" id="maxInterval">
           <option value="2">2</option>
           <option value="3">3</option>
@@ -106,7 +111,7 @@
       </div>
       <div class="gameButtons">
         <div class="leftSide">
-          <button class='start'>Start</button>
+          <button class='start'>Play note</button>
         </div>
         <div class="rightSide">
           <button class="repeat">Repeat</button>

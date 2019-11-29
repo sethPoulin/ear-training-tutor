@@ -22,6 +22,7 @@ const octaves = {
  octave7 : ['c7','c-7','d7','d-7','e7','f7','f-7','g7','g-7','a7','a-7','b7'],
 //  octave8 : ['c8']
 }
+
  //removes grey colour from keys previously not in use
 const removeGreyColour = () => {
   const allKeys = document.querySelectorAll('svg rect');
@@ -38,6 +39,16 @@ const disableUnusedKeys = () => {
     key.removeEventListener('click',playUserInput);
   });
 };
+
+//hides the landing section and displays the settings section
+const showSettings = () => {
+  console.log('showSettings was fired');
+  document.querySelector('header').classList.add('hidden');
+  document.querySelector('.settingsContainer').classList.remove('hidden');
+}
+
+//runs showSettings when user clicks 'get started' button
+document.querySelector('button.getStarted').addEventListener('click', showSettings);
 
 const assignNotesToBrowserKeys = function() {
   removeGreyColour();
