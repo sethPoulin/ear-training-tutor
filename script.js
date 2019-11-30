@@ -1,11 +1,18 @@
 //create octave note arrays
 
 const intervals = {
-  1: 'semitone',
-  2: 'whole tone',
-  5: 'perfect fifth',
-  7: 'major seventh',
-  8: 'minor seventh'
+  1: 'Minor second',
+  2: 'Major second',
+  3: 'Minor third',
+  4: 'Major third',
+  5: 'Perfect fourth',
+  6: 'Diminished fifth/Augmented fourth',
+  7: 'Perfect fifth',
+  8: 'Minor sixth',
+  9: 'Major sixth',
+  10: 'Minor seventh',
+  11: 'Major seventh',
+  12: 'Perfect octave'
 }
 
 //a maximum of 4 octaves can be chosen.  
