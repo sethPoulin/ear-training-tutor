@@ -1,5 +1,5 @@
-//create octave note arrays
 
+//object to consult for interval name
 const intervals = {
   1: 'Minor second',
   2: 'Major second',
@@ -14,9 +14,6 @@ const intervals = {
   11: 'Major seventh',
   12: 'Perfect octave'
 }
-
-//a maximum of 4 octaves can be chosen.  
-//These must be consecutive.  If user tries to select non-consecutive octaves, display an error message.
 
 const octaves = {
 //  octave0 : ['a0','a-0','b0'],
@@ -212,8 +209,6 @@ const setUserOctaves = function(){
     fadeInMessage('.octaveMessage p');
     disableButtons();
   }
-  console.log(userOctaveNotes);
-  console.log(checkOctavesAreAdjacent());
   assignNotesToBrowserKeys();
 }
 
@@ -269,6 +264,16 @@ playFirstRandomNote = () => {
   playNote(firstAudio);
 }
 
+const findInterval= (note) => {
+  const noteOneIndex = secondRandomNoteArray.indexOf(firstRandomNote);
+  const noteTwoIndex = secondRandomNoteArray.indexOf(note);
+  const intervalLength  = noteOneIndex > noteTwoIndex ? 
+  noteOneIndex - noteTwoIndex: 
+  noteTwoIndex - noteOneIndex;
+  console.log(`The interval is ${intervalLength} semi-tones, which is a ${intervals[intervalLength]}.`);
+  return `The interval is ${intervalLength} semi-tones, which is a ${intervals[intervalLength]}.`;
+}
+
 const startTest = () => {
   //Remove existing event listeners and classes
   removeEventListenersAndClasses()
@@ -281,7 +286,6 @@ const startTest = () => {
   }, 2500); 
 }
 
-//Once the first random note is played, we create an array of possible second notes based on the user interval.  For interval x we add x notes ahead of the first note and x notes behind the first note, all selected from the userOctaveNotes.  If it's not possible to select x notes in one or both directions, we add as many as we can until the end of the array is reached.
 const secondRandomNoteArray = [];
   
 const getSecondRandomNoteArray = function(){
@@ -314,15 +318,12 @@ const playNote = (note) => {
 
 const playSecondRandomNote = () => { 
   //pick a note from the second random note array 
-  console.log(getSecondRandomNoteArray()); 
   secondRandomNote = getRandomNote(getSecondRandomNoteArray());
-  console.log(secondRandomNote);
   //selects a different note if the first note and second notes are the same
   while(secondRandomNote === firstRandomNote){
     secondRandomNote = getRandomNote(getSecondRandomNoteArray());
   };
-  const secondKeyToPlay =  document.querySelector(`audio[data-key=${secondRandomNote}]`);
-  console.log('secondRandomNote:',secondRandomNote); 
+  const secondKeyToPlay =  document.querySelector(`audio[data-key=${secondRandomNote}]`); 
   playNote(secondKeyToPlay); 
 }
 
@@ -332,13 +333,12 @@ const testUserNote = (e) => {
   const userKey = document.querySelector(`rect[data-key=${userNote}]`);
   const userAudio = document.querySelector(`audio[data-key=${userNote}]`);
   playNote(userAudio);
+  findInterval(userNote);
  if(compareNote(secondRandomNote,userNote)){
    //show correct message
    userKey.classList.add('correct');
-   console.log('Correct');
  } else {
   //show incorrect message
-  console.log('Incorrect');
   userKey.classList.add('incorrect');
  };
 };
