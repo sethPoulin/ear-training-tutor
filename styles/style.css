@@ -278,6 +278,10 @@ h2 {
   font-weight: bold;
 }
 
+header h2:first-of-type {
+  max-width: 710px;
+}
+
 h3 {
   font-size: 2.2rem;
   margin-bottom: 20px;
