@@ -1,4 +1,6 @@
 
+//======REFERENCE OBJECTS==========
+
 //object to consult for interval name
 const intervals = {
   1: 'Minor Second',
@@ -27,6 +29,8 @@ const octaves = {
 //  octave8 : ['c8']
 }
 
+//=======KEYBOARD FUNCTIONALITY AND APPEARANCE===========
+
  //removes grey colour from keys previously not in use
 const removeGreyColour = () => {
   const allKeys = document.querySelectorAll('svg rect');
@@ -44,23 +48,35 @@ const disableUnusedKeys = () => {
   });
 };
 
+//=========TEST PAGE FUNCTIONALITY AND APPEARANCE===============
+
 //hides the landing section and displays the settings section
 const showSettings = () => {
   document.querySelector('header').classList.add('hidden');
   document.querySelector('.settingsContainer').classList.remove('hidden');
 }
 
+//===========HIDING/SHOWING THE TESTING SECTION=================
+
 //runs showSettings when user clicks 'get started' button
 document.querySelector('button.getStarted').addEventListener('click', showSettings);
 
+//==============TEST SETUP=========================
+
+//assigns a note value to each piano key by looping over the keyPattern array
 const assignNotesToBrowserKeys = function() {
   removeGreyColour();
+  //put all the white keys and black keys in 2 separate arrays.
   const whiteKeysArr = Array.from(document.querySelectorAll('svg rect:not(.black)'));
   const blackKeysArr = Array.from(document.querySelectorAll('svg rect.black'));
+  //establishes repeating pattern of white/black keys
   const keyPattern = [0,1,0,1,0,0,1,0,1,0,1,0];
+  //the notes to map are the notes currently in userOctaves
   const notesToMapArr = [...userOctaveNotes];
   const orderedNotesArr = [];
+  //as long as there are white keys in the white keys array (we use white keys because there are more white keys than black keys so white array will finish emptying last)...
   while(whiteKeysArr.length > 0){
+    //map over the keyPattern 
     keyPattern.map((key) => {
       if(key===0){
         const keyToAdd = (whiteKeysArr.splice(0,1))[0];
@@ -222,7 +238,12 @@ const getRandomNote = (arr) => {
 let firstRandomNote = '';
 
 const repeat = () => {
-  const firstAudio = document.querySelector(`audio[data-key=${firstRandomNote}`);
+  let firstAudio;
+  if(firstRandomNote) {
+    firstAudio = document.querySelector(`audio[data-key=${firstRandomNote}`);
+  } else {
+    return;
+  }
   playNote(firstAudio);
   setTimeout(() => {
     const secondAudio = document.querySelector(`audio[data-key=${secondRandomNote}`);
