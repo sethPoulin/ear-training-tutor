@@ -21,6 +21,11 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
   font-weight: bold;
 }
 
+.underline {
+  border-bottom: 3px solid $red;
+  padding-bottom: 1px;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -90,17 +95,17 @@ button.getStarted {
   }
 }
 
-@keyframes fadeUp {
-  0%{opacity: 0;}
-  100% {opacity: 1;}
-}
+// @keyframes fadeUp {
+//   0%{opacity: 0;}
+//   100% {opacity: 1;}
+// }
 
-.fadeIn {
-  animation-name: fadeUp;
-  animation-duration: .5s;
-  animation-fill-mode: forwards;
-  // animation-delay: 1s;
-}
+// .fadeIn {
+//   animation-name: fadeUp;
+//   animation-duration: .5s;
+//   animation-fill-mode: forwards;
+//   // animation-delay: 1s;
+// }
 
 
 .settingsContainer {
@@ -114,7 +119,7 @@ button.getStarted {
   opacity: 1;
 
   &.collapsed {
-    height: 450px;
+    height: 480px;
   }
   // position: relative;
 }
@@ -175,10 +180,10 @@ section.game {
 }
 
 .octaveMessage p {
-  opacity: 0;
+  opacity: 1;
   margin: 20px auto;
   height: 50px;
-  transition: height .5s, margin .5s;
+  transition: height .5s, margin .5s, opacity 0.5s;
   font-size: 2.2rem;
   border: 3px solid $red;
   padding: 10px;
@@ -190,6 +195,7 @@ section.game {
     padding-bottom: 0;
     margin: 0px;
     border: none;
+    opacity: 0;
   }
 }
 
@@ -239,6 +245,18 @@ button.disabled {
 
 .keyboard {
   display: flex;
+}
+
+.intervalMessage p {
+  height: 60px;
+  transition: height .5s;
+  padding-top: 34px;
+  font-weight: bold;
+  font-size: 2.2rem;
+
+  &.collapsed {
+    height: 0px;
+  }
 }
 
 .gameButtons {

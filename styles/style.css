@@ -233,6 +233,11 @@ textarea {
   font-weight: bold;
 }
 
+.underline {
+  border-bottom: 3px solid #EA5A4F;
+  padding-bottom: 1px;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -302,33 +307,6 @@ button.getStarted:hover {
   color: #EA5A4F;
 }
 
-@-webkit-keyframes fadeUp {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeUp;
-          animation-name: fadeUp;
-  -webkit-animation-duration: .5s;
-          animation-duration: .5s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
 .settingsContainer {
   border: 4px solid #EA5A4F;
   width: 80%;
@@ -342,7 +320,7 @@ button.getStarted:hover {
 }
 
 .settingsContainer.collapsed {
-  height: 450px;
+  height: 480px;
 }
 
 .close {
@@ -415,11 +393,11 @@ section.game {
 }
 
 .octaveMessage p {
-  opacity: 0;
+  opacity: 1;
   margin: 20px auto;
   height: 50px;
-  -webkit-transition: height .5s, margin .5s;
-  transition: height .5s, margin .5s;
+  -webkit-transition: height .5s, margin .5s, opacity 0.5s;
+  transition: height .5s, margin .5s, opacity 0.5s;
   font-size: 2.2rem;
   border: 3px solid #EA5A4F;
   padding: 10px;
@@ -432,6 +410,7 @@ section.game {
   padding-bottom: 0;
   margin: 0px;
   border: none;
+  opacity: 0;
 }
 
 rect {
@@ -483,6 +462,19 @@ button.disabled:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.intervalMessage p {
+  height: 60px;
+  -webkit-transition: height .5s;
+  transition: height .5s;
+  padding-top: 34px;
+  font-weight: bold;
+  font-size: 2.2rem;
+}
+
+.intervalMessage p.collapsed {
+  height: 0px;
 }
 
 .gameButtons {

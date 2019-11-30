@@ -1,18 +1,18 @@
 
 //object to consult for interval name
 const intervals = {
-  1: 'Minor second',
-  2: 'Major second',
-  3: 'Minor third',
-  4: 'Major third',
-  5: 'Perfect fourth',
-  6: 'Diminished fifth/Augmented fourth',
-  7: 'Perfect fifth',
-  8: 'Minor sixth',
-  9: 'Major sixth',
-  10: 'Minor seventh',
-  11: 'Major seventh',
-  12: 'Perfect octave'
+  1: 'Minor Second',
+  2: 'Major Second',
+  3: 'Minor Third',
+  4: 'Major Third',
+  5: 'Perfect Fourth',
+  6: 'Diminished Fifth/Augmented Fourth',
+  7: 'Perfect Fifth',
+  8: 'Minor Sixth',
+  9: 'Major Sixth',
+  10: 'Minor Seventh',
+  11: 'Major Seventh',
+  12: 'Perfect Octave'
 }
 
 const octaves = {
@@ -91,8 +91,6 @@ document.querySelector('.close').addEventListener('click',restart);
 
 function playUserInput (e){
   const note = document.querySelector(`audio[data-key=${e.target.getAttribute('data-key')}]`);
-  console.log(e.target);
-  console.log(note);
   playNote(note);
 };
 
@@ -145,30 +143,28 @@ const disableButtons = () => {
   document.querySelector('button.repeat').classList.add('disabled');
 }
 
-const displayMessage = (string) => {
-  const test = document.querySelector('.octaveMessage p');
-  console.log('string:',string);
+const displayMessage = (string, node = '.octaveMessage p') => {
+  const test = document.querySelector(node);
   test.innerHTML = string;
+  // test.classList.add('fadeIn');
 };
 
-const fadeInMessage = (node) => {
+// const fadeInMessage = (node) => {
   //wait 100ms, then add fadeIn class to message to fade it in.
-  setTimeout(()=>{
-  document.querySelector(node).classList.add('fadeIn');
-  },100); 
-};
+  // setTimeout(()=>{
+  // document.querySelector(node).classList.add('fadeIn');
+  // },100); 
+// };
 
-const collapseMessageBox = () => {
-  document.querySelector('.octaveMessage p').classList.add('collapsed');
-  document.querySelector('.settingsContainer').classList.add('collapsed');
+const collapseMessageArea = (node1, node2 = node1) => {
+  document.querySelector(node1).classList.add('collapsed');
+  document.querySelector(node2).classList.add('collapsed');
+} 
 
-};
-
-const uncollapseMessageBox = () => {
-  document.querySelector('.octaveMessage p').classList.remove('collapsed');
-  document.querySelector('.settingsContainer').classList.remove('collapsed');
-};
-
+const uncollapseMessageArea = (node1, node2 = node1) => {
+  document.querySelector(node1).classList.remove('collapsed');
+  document.querySelector(node2).classList.remove('collapsed');
+}
 
 const userOctaveNotes = [];
 //populates the userOctaveNotes array with the selected octaves
@@ -176,7 +172,7 @@ const setUserOctaves = function(){
   //empties the userOctaveNotes array
   userOctaveNotes.length = 0;
   //removes any existing messages and enables buttons
-  collapseMessageBox('.octaveMessage p');
+  collapseMessageArea('.octaveMessage p','.settingsContainer');
   document.querySelector('.octaveMessage p').classList.remove('fadeIn');
   displayMessage('');
   document.querySelector('button.start').removeAttribute('disabled','true');
@@ -187,16 +183,16 @@ const setUserOctaves = function(){
   const checked = document.querySelectorAll(`input[type="checkbox"]:checked`);
   //if no octaves are selected, disable buttons, display error message and return
   if(checked.length === 0){
-    uncollapseMessageBox();
+    uncollapseMessageArea('.octaveMessage p','.settingsContainer');
     displayMessage('Please select at least one octave');
-    fadeInMessage('.octaveMessage p');
+    // fadeInMessage('.octaveMessage p');
     disableButtons();
     return;
   }
   if(checked.length > 4){
-    uncollapseMessageBox();
+    uncollapseMessageArea('.octaveMessage p','.settingsContainer');
     displayMessage('Please select a maximum of 4 octaves.');
-    fadeInMessage('.octaveMessage p');
+    // fadeInMessage('.octaveMessage p');
     disableButtons();
   }
   checked.forEach(checkbox => {
@@ -204,9 +200,9 @@ const setUserOctaves = function(){
     userOctaveNotes.push(...octaves[checkbox.id]);
   })
   if(!checkOctavesAreAdjacent()){
-    uncollapseMessageBox();
+    uncollapseMessageArea('.octaveMessage p','.settingsContainer');
     displayMessage('Octaves must be adjacent');
-    fadeInMessage('.octaveMessage p');
+    // fadeInMessage('.octaveMessage p');
     disableButtons();
   }
   assignNotesToBrowserKeys();
@@ -220,7 +216,6 @@ octaveSelector.addEventListener('change',setUserOctaves);
 const getRandomNote = (arr) => {
   const randomNoteIndex = Math.floor(Math.random() * arr.length);
   const randomNote = arr[randomNoteIndex];
-  console.log(randomNote);
   return randomNote;
 }
 
@@ -241,6 +236,8 @@ repeatButton.addEventListener('click',repeat);
 
 const removeEventListenersAndClasses = () => {
   const allPianoKeys = document.querySelectorAll('.keyboard rect');
+  collapseMessageArea('.intervalMessage p','.settingsContainer');
+  displayMessage('','.intervalMessage p');
   allPianoKeys.forEach((el) => {
     el.removeEventListener('click',playUserInput);
     el.classList.remove('firstNote');
@@ -270,8 +267,7 @@ const findInterval= (note) => {
   const intervalLength  = noteOneIndex > noteTwoIndex ? 
   noteOneIndex - noteTwoIndex: 
   noteTwoIndex - noteOneIndex;
-  console.log(`The interval is ${intervalLength} semi-tones, which is a ${intervals[intervalLength]}.`);
-  return `The interval is ${intervalLength} semi-tones, which is a ${intervals[intervalLength]}.`;
+  return `${correct} the interval is ${intervalLength} semi-tones, which is a <span class="underline">${intervals[intervalLength]}.<span>`;
 }
 
 const startTest = () => {
@@ -333,15 +329,20 @@ const testUserNote = (e) => {
   const userKey = document.querySelector(`rect[data-key=${userNote}]`);
   const userAudio = document.querySelector(`audio[data-key=${userNote}]`);
   playNote(userAudio);
-  findInterval(userNote);
  if(compareNote(secondRandomNote,userNote)){
    //show correct message
    userKey.classList.add('correct');
+   correct = 'Correct:';
  } else {
   //show incorrect message
   userKey.classList.add('incorrect');
+  correct = 'Incorrect:';
  };
+ uncollapseMessageArea('.intervalMessage p','.settingsContainer');
+ displayMessage(findInterval(userNote), '.intervalMessage p');
 };
+
+let correct = '';
 
 const compareNote = (note1, note2) => {
   return note1 === note2;
