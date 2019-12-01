@@ -130,7 +130,11 @@ button.getStarted {
 
 .close {
   position: absolute;
-  transform: scale(0.03) translateY(-1845%) translateX(1500%);
+  top: 34px;
+  right: 60px;
+  height: 30px;
+  width: 30px;
+
 
   &:hover {
     cursor: pointer;
