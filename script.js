@@ -87,7 +87,6 @@ const restart = () => {
 document.querySelector('.close').addEventListener('click',restart);
 
 
-
 //===============PLAYING USER INPUT======================
 
 //Before user starts their first round of the tutor, they can play notes on the piano
