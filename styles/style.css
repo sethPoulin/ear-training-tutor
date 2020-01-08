@@ -365,6 +365,12 @@ body {
   background-color: #eae7dc;
 }
 
+@media (max-width: 918px) {
+  body {
+    width: 695px;
+  }
+}
+
 .header__instructions-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -452,6 +458,19 @@ h3 {
   text-align: center;
 }
 
+@media (max-width: 918px) {
+  h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 918px) {
+  label {
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+}
+
 header {
   padding-top: 5rem;
 }
@@ -522,6 +541,8 @@ button.getStarted:hover {
 
 fieldset[name="octaves"] {
   margin-bottom: 0;
+  padding: 1rem;
+  text-align: center;
 }
 
 fieldset[name="octaves"] p {
@@ -570,6 +591,15 @@ section.game {
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5px;
+}
+
+@media (max-width: 918px) {
+  .maxInterval {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .maxInterval h3 {
@@ -650,6 +680,13 @@ button.disabled:hover {
   display: flex;
 }
 
+@media (max-width: 918px) {
+  .keyboard {
+    -webkit-transform: translateY(22rem);
+            transform: translateY(22rem);
+  }
+}
+
 .intervalMessage p {
   height: 60px;
   -webkit-transition: height 0.5s;
@@ -672,6 +709,13 @@ button.disabled:hover {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+@media (max-width: 918px) {
+  .gameButtons {
+    width: 500px;
+    margin-top: -150px;
+  }
 }
 
 button {
