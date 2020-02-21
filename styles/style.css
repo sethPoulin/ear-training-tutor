@@ -1,4 +1,84 @@
-a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7,7 +87,17 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
   vertical-align: baseline;
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -15,15 +105,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:after, blockquote:before, q:after, q:before {
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
   content: '';
   content: none;
 }
@@ -33,12 +128,15 @@ table {
   border-spacing: 0;
 }
 
-input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration, input[type=search]::-webkit-search-results-button, input[type=search]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-input[type=search] {
+input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-box-sizing: content-box;
@@ -51,7 +149,9 @@ textarea {
   resize: vertical;
 }
 
-audio, canvas, video {
+audio,
+canvas,
+video {
   display: inline-block;
   max-width: 100%;
 }
@@ -75,7 +175,8 @@ a:focus {
   outline: thin dotted;
 }
 
-a:active, a:hover {
+a:active,
+a:hover {
   outline: 0;
 }
 
@@ -95,7 +196,7 @@ form {
 fieldset {
   border: 1px solid silver;
   margin: 0 2px;
-  padding: .35em .625em .75em;
+  padding: 0.35em 0.625em 0.75em;
 }
 
 legend {
@@ -104,46 +205,58 @@ legend {
   white-space: normal;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-size: 100%;
   margin: 0;
   vertical-align: baseline;
 }
 
-button, input {
+button,
+input {
   line-height: normal;
 }
 
-button, select {
+button,
+select {
   text-transform: none;
 }
 
-button, html input[type=button], input[type=reset], input[type=submit] {
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
   -webkit-appearance: button;
   cursor: pointer;
 }
 
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default;
 }
 
-input[type=checkbox], input[type=radio] {
+input[type='checkbox'],
+input[type='radio'] {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0;
 }
 
-input[type=search] {
+input[type='search'] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-button::-moz-focus-inner, input::-moz-focus-inner {
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
@@ -158,7 +271,11 @@ table {
   border-spacing: 0;
 }
 
-button, html, input, select, textarea {
+button,
+html,
+input,
+select,
+textarea {
   color: #222;
 }
 
@@ -187,10 +304,10 @@ textarea {
 }
 
 .chromeframe {
-  margin: .2em 0;
+  margin: 0.2em 0;
   background: #ccc;
   color: #000;
-  padding: .2em 0;
+  padding: 0.2em 0;
 }
 
 .clearfix:after {
@@ -245,7 +362,32 @@ html {
 body {
   max-width: 1400px;
   margin: 40px auto 0;
-  background-color: #EAE7DC;
+  background-color: #eae7dc;
+}
+
+@media (max-width: 918px) {
+  body {
+    max-width: 695px;
+  }
+}
+
+.header__instructions-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 1.5rem;
+  max-width: 695px;
+  margin: 0 auto;
 }
 
 h1 {
@@ -254,16 +396,31 @@ h1 {
   font-style: italic;
   font-weight: bold;
   text-align: center;
-  padding: 30px;
+  padding: 3rem;
   color: #EA5A4F;
   letter-spacing: 0.1rem;
   border: 4px solid #EA5A4F;
   margin: 0 auto;
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
   max-width: 850px;
 }
 
-h2, h3, p, button, select, input, label {
+@media (max-width: 918px) {
+  h1 {
+    font-size: 3rem;
+    max-width: auto;
+    padding: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+h2,
+h3,
+p,
+button,
+select,
+input,
+label {
   font-family: 'Roboto', sans-serif;
   font-size: 1.8rem;
   letter-spacing: 0.1rem;
@@ -273,28 +430,61 @@ h2 {
   font-size: 2rem;
   max-width: 680px;
   text-align: center;
-  margin: 20px auto;
+  margin: 1rem auto;
   line-height: 3.8rem;
   font-weight: bold;
+}
+
+@media (max-width: 918px) {
+  h2 {
+    font-size: 1.6rem;
+    max-width: 450px;
+    line-height: 2.5rem;
+  }
 }
 
 header h2:first-of-type {
   max-width: 710px;
 }
 
+@media (max-width: 918px) {
+  header h2:first-of-type {
+    max-width: 450px;
+  }
+}
+
 h3 {
   font-size: 2.2rem;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
   font-weight: bold;
   text-align: center;
 }
 
+@media (max-width: 918px) {
+  h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 918px) {
+  label {
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+}
+
 header {
-  padding-top: 50px;
+  padding-top: 5rem;
+}
+
+@media (max-width: 918px) {
+  header {
+    padding-top: 3rem;
+  }
 }
 
 button.getStarted {
-  margin: 50px auto;
+  margin: 2.5rem auto;
   display: block;
   max-width: 300px;
   background-color: #EA5A4F;
@@ -303,6 +493,14 @@ button.getStarted {
   font-weight: bold;
   letter-spacing: 0.2rem;
   padding: 15px 0;
+}
+
+@media (max-width: 918px) {
+  button.getStarted {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    max-width: 250px;
+  }
 }
 
 button.getStarted:hover {
@@ -323,8 +521,20 @@ button.getStarted:hover {
   opacity: 1;
 }
 
+@media (max-width: 918px) {
+  .settingsContainer {
+    margin-top: 30px;
+  }
+}
+
 .settingsContainer.collapsed {
   height: 480px;
+}
+
+@media (max-width: 918px) {
+  .settingsContainer.collapsed {
+    height: 550px;
+  }
 }
 
 .close {
@@ -343,11 +553,13 @@ button.getStarted:hover {
   fill: #8E8D8A;
 }
 
-fieldset[name="octaves"] {
+fieldset[name='octaves'] {
   margin-bottom: 0;
+  padding: 1rem;
+  text-align: center;
 }
 
-fieldset[name="octaves"] p {
+fieldset[name='octaves'] p {
   padding-bottom: 15px;
 }
 
@@ -356,7 +568,8 @@ fieldset[name="octaves"] p {
   height: 0;
 }
 
-section.settings, section.game {
+section.settings,
+section.game {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -371,7 +584,7 @@ section.settings, section.game {
   transition: all 0.7s;
 }
 
-input[type=checkbox] {
+input[type='checkbox'] {
   margin-right: 5px;
 }
 
@@ -394,6 +607,15 @@ section.game {
   margin-bottom: 5px;
 }
 
+@media (max-width: 918px) {
+  .maxInterval {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .maxInterval h3 {
   margin-bottom: 0;
 }
@@ -402,8 +624,8 @@ section.game {
   opacity: 1;
   margin: 20px auto;
   height: 50px;
-  -webkit-transition: height .5s, margin .5s, opacity 0.5s;
-  transition: height .5s, margin .5s, opacity 0.5s;
+  -webkit-transition: height 0.5s, margin 0.5s, opacity 0.5s;
+  transition: height 0.5s, margin 0.5s, opacity 0.5s;
   font-size: 2.2rem;
   border: 3px solid #EA5A4F;
   padding: 10px;
@@ -432,11 +654,13 @@ rect {
   fill: #5296c1;
 }
 
-.correct, rect:hover.correct {
+.correct,
+rect:hover.correct {
   fill: #239f3c;
 }
 
-.incorrect, rect:hover.incorrect {
+.incorrect,
+rect:hover.incorrect {
   fill: #871919;
 }
 
@@ -446,8 +670,8 @@ rect:hover {
 
 .disabled {
   fill: #9f9f9f;
-  -webkit-transition: fill .3s;
-  transition: fill .3s;
+  -webkit-transition: fill 0.3s;
+  transition: fill 0.3s;
 }
 
 button.disabled {
@@ -470,10 +694,19 @@ button.disabled:hover {
   display: flex;
 }
 
+@media (max-width: 918px) {
+  .keyboard {
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+}
+
 .intervalMessage p {
-  height: 60px;
-  -webkit-transition: height .5s;
-  transition: height .5s;
+  text-align: center;
+  line-height: 3.5rem;
+  height: 90px;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
   padding-top: 34px;
   font-weight: bold;
   font-size: 2.2rem;
@@ -494,6 +727,17 @@ button.disabled:hover {
           justify-content: space-between;
 }
 
+@media (max-width: 918px) {
+  .gameButtons {
+    max-width: 350px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: -30px;
+  }
+}
+
 button {
   width: 100%;
   padding: 10px 0;
@@ -506,13 +750,6 @@ button:hover {
   color: white;
 }
 
-.leftSide, .rightSide {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-}
-
 .rightSide {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
@@ -522,5 +759,20 @@ button:hover {
 
 .leftSide {
   padding-right: 10px;
+}
+
+.leftSide,
+.rightSide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+@media (max-width: 918px) {
+  .leftSide,
+  .rightSide {
+    padding: 5px 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */

@@ -266,7 +266,7 @@ const findInterval = (note) => {
   const intervalLength  = noteOneIndex > noteTwoIndex ? 
   noteOneIndex - noteTwoIndex: 
   noteTwoIndex - noteOneIndex;
-  return `${correctMessage} the interval is ${intervalLength} semi-tones, which is a <span class="underline">${intervals[intervalLength]}.<span>`;
+  return `${correctMessage} that interval is ${intervalLength} semi-tones, which is a <span class="underline">${intervals[intervalLength]}.<span>`;
 }
 
 //Runs when the user clicks the 'Start new round' button.  Starts a new round of the tutor
