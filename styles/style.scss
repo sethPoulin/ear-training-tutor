@@ -1,4 +1,4 @@
-@import "partials/_variables.scss";
+@import 'partials/_variables.scss';
 
 a,
 abbr,
@@ -116,21 +116,21 @@ blockquote:after,
 blockquote:before,
 q:after,
 q:before {
-	content: "";
+	content: '';
 	content: none;
 }
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
-input[type="search"] {
+input[type='search'] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	-webkit-box-sizing: content-box;
@@ -204,9 +204,9 @@ select {
 	text-transform: none;
 }
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
 	-webkit-appearance: button;
 	cursor: pointer;
 }
@@ -214,19 +214,19 @@ button[disabled],
 html input[disabled] {
 	cursor: default;
 }
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
 	box-sizing: border-box;
 	padding: 0;
 }
-input[type="search"] {
+input[type='search'] {
 	-webkit-appearance: textfield;
 	-moz-box-sizing: content-box;
 	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
 }
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
 	-webkit-appearance: none;
 }
 button::-moz-focus-inner,
@@ -279,7 +279,7 @@ textarea {
 	visibility: hidden;
 	display: block;
 	font-size: 0;
-	content: "";
+	content: '';
 	clear: both;
 	height: 0;
 }
@@ -330,7 +330,7 @@ body {
 	background-color: #eae7dc;
 
 	@media (max-width: 918px) {
-		width: 695px;
+		max-width: 695px;
 	}
 }
 
@@ -340,10 +340,12 @@ body {
 	justify-content: center;
 	align-items: center;
 	padding: 0 1.5rem;
+	max-width: 695px;
+	margin: 0 auto;
 }
 
 h1 {
-	font-family: "Playfair Display", serif;
+	font-family: 'Playfair Display', serif;
 	font-size: 5.6rem;
 	font-style: italic;
 	font-weight: bold;
@@ -371,7 +373,7 @@ button,
 select,
 input,
 label {
-	font-family: "Roboto", sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 1.8rem;
 	letter-spacing: 0.1rem;
 }
@@ -380,7 +382,7 @@ h2 {
 	font-size: 2rem;
 	max-width: 680px;
 	text-align: center;
-	margin: 2rem auto;
+	margin: 1rem auto;
 	line-height: 3.8rem;
 	font-weight: bold;
 
@@ -426,7 +428,7 @@ header {
 }
 
 button.getStarted {
-	margin: 5rem auto;
+	margin: 2.5rem auto;
 	display: block;
 	max-width: 300px;
 	background-color: $red;
@@ -449,18 +451,6 @@ button.getStarted {
 	}
 }
 
-// @keyframes fadeUp {
-//   0%{opacity: 0;}
-//   100% {opacity: 1;}
-// }
-
-// .fadeIn {
-//   animation-name: fadeUp;
-//   animation-duration: .5s;
-//   animation-fill-mode: forwards;
-//   // animation-delay: 1s;
-// }
-
 .settingsContainer {
 	border: 4px solid $red;
 	width: 80%;
@@ -471,8 +461,16 @@ button.getStarted {
 	transition: height 0.5s;
 	opacity: 1;
 
+	@media (max-width: 918px) {
+		margin-top: 30px;
+	}
+
 	&.collapsed {
 		height: 480px;
+
+		@media (max-width: 918px) {
+			height: 550px;
+		}
 	}
 	// position: relative;
 }
@@ -493,7 +491,7 @@ button.getStarted {
 	fill: $grey;
 }
 
-fieldset[name="octaves"] {
+fieldset[name='octaves'] {
 	margin-bottom: 0;
 	padding: 1rem;
 	text-align: center;
@@ -516,7 +514,7 @@ section.game {
 	transition: all 0.7s;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
 	margin-right: 5px;
 }
 
@@ -611,12 +609,15 @@ button.disabled {
 	display: flex;
 
 	@media (max-width: 918px) {
-		transform: translateY(22rem);
+		// transform: translateY(22rem) scale(0.8);
+		transform: scale(0.8);
 	}
 }
 
 .intervalMessage p {
-	height: 60px;
+	text-align: center;
+	line-height: 3.5rem;
+	height: 90px;
 	transition: height 0.5s;
 	padding-top: 34px;
 	font-weight: bold;
@@ -634,8 +635,10 @@ button.disabled {
 	justify-content: space-between;
 
 	@media (max-width: 918px) {
-		width: 500px;
-		margin-top: -150px;
+		max-width: 350px;
+		// margin-top: -150px;
+		flex-direction: column;
+		margin-top: -30px;
 	}
 }
 
@@ -652,12 +655,6 @@ button {
 	}
 }
 
-.leftSide,
-.rightSide {
-	display: flex;
-	width: 100%;
-}
-
 .rightSide {
 	justify-content: flex-end;
 	padding-left: 10px;
@@ -665,6 +662,16 @@ button {
 
 .leftSide {
 	padding-right: 10px;
+}
+
+.leftSide,
+.rightSide {
+	display: flex;
+	width: 100%;
+
+	@media (max-width: 918px) {
+		padding: 5px 0;
+	}
 }
 
 // .octaveMessage p.tall {

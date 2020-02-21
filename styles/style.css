@@ -119,7 +119,7 @@ blockquote:after,
 blockquote:before,
 q:after,
 q:before {
-  content: "";
+  content: '';
   content: none;
 }
 
@@ -128,15 +128,15 @@ table {
   border-spacing: 0;
 }
 
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-box-sizing: content-box;
@@ -225,9 +225,9 @@ select {
 }
 
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
   -webkit-appearance: button;
   cursor: pointer;
 }
@@ -237,21 +237,21 @@ html input[disabled] {
   cursor: default;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0;
 }
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -314,7 +314,7 @@ textarea {
   visibility: hidden;
   display: block;
   font-size: 0;
-  content: "";
+  content: '';
   clear: both;
   height: 0;
 }
@@ -367,7 +367,7 @@ body {
 
 @media (max-width: 918px) {
   body {
-    width: 695px;
+    max-width: 695px;
   }
 }
 
@@ -386,10 +386,12 @@ body {
       -ms-flex-align: center;
           align-items: center;
   padding: 0 1.5rem;
+  max-width: 695px;
+  margin: 0 auto;
 }
 
 h1 {
-  font-family: "Playfair Display", serif;
+  font-family: 'Playfair Display', serif;
   font-size: 5.6rem;
   font-style: italic;
   font-weight: bold;
@@ -419,7 +421,7 @@ button,
 select,
 input,
 label {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.8rem;
   letter-spacing: 0.1rem;
 }
@@ -428,7 +430,7 @@ h2 {
   font-size: 2rem;
   max-width: 680px;
   text-align: center;
-  margin: 2rem auto;
+  margin: 1rem auto;
   line-height: 3.8rem;
   font-weight: bold;
 }
@@ -482,7 +484,7 @@ header {
 }
 
 button.getStarted {
-  margin: 5rem auto;
+  margin: 2.5rem auto;
   display: block;
   max-width: 300px;
   background-color: #EA5A4F;
@@ -519,8 +521,20 @@ button.getStarted:hover {
   opacity: 1;
 }
 
+@media (max-width: 918px) {
+  .settingsContainer {
+    margin-top: 30px;
+  }
+}
+
 .settingsContainer.collapsed {
   height: 480px;
+}
+
+@media (max-width: 918px) {
+  .settingsContainer.collapsed {
+    height: 550px;
+  }
 }
 
 .close {
@@ -539,13 +553,13 @@ button.getStarted:hover {
   fill: #8E8D8A;
 }
 
-fieldset[name="octaves"] {
+fieldset[name='octaves'] {
   margin-bottom: 0;
   padding: 1rem;
   text-align: center;
 }
 
-fieldset[name="octaves"] p {
+fieldset[name='octaves'] p {
   padding-bottom: 15px;
 }
 
@@ -570,7 +584,7 @@ section.game {
   transition: all 0.7s;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   margin-right: 5px;
 }
 
@@ -682,13 +696,15 @@ button.disabled:hover {
 
 @media (max-width: 918px) {
   .keyboard {
-    -webkit-transform: translateY(22rem);
-            transform: translateY(22rem);
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
   }
 }
 
 .intervalMessage p {
-  height: 60px;
+  text-align: center;
+  line-height: 3.5rem;
+  height: 90px;
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
   padding-top: 34px;
@@ -713,8 +729,12 @@ button.disabled:hover {
 
 @media (max-width: 918px) {
   .gameButtons {
-    width: 500px;
-    margin-top: -150px;
+    max-width: 350px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: -30px;
   }
 }
 
@@ -730,14 +750,6 @@ button:hover {
   color: white;
 }
 
-.leftSide,
-.rightSide {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-}
-
 .rightSide {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
@@ -747,5 +759,20 @@ button:hover {
 
 .leftSide {
   padding-right: 10px;
+}
+
+.leftSide,
+.rightSide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+@media (max-width: 918px) {
+  .leftSide,
+  .rightSide {
+    padding: 5px 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */
